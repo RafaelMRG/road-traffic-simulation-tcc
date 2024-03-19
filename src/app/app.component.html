@@ -1,0 +1,31 @@
+<mat-drawer-container autosize style="height: 100vh">
+	<mat-drawer #drawer mode="side" style="padding: 12px">
+		<div style="height: 64px">
+			<h4>Menu</h4>
+		</div>
+		<mat-divider class="mb-3"></mat-divider>
+		<div style="width: max-content">
+			@for (item of navButtons; track $index ) {
+			<div class="row mb-2 mx-2 g-3">
+				<a
+					[routerLink]="item.url"
+					routerLinkActive
+					#rla="routerLinkActive"
+					mat-button
+					class="d-flex justify-content-start nav__buttons"
+          [routerLinkActiveOptions]="{ exact: true }"
+					[color]="rla.isActive ? 'primary' : 'basic'"
+				>
+					<mat-icon>{{ item.icon }}</mat-icon>
+					{{ item.title }}
+				</a>
+			</div>
+			}
+		</div>
+	</mat-drawer>
+
+	<div>
+		<app-navbar (toggleSidebar)="drawer.toggle()"></app-navbar>
+	</div>
+	<router-outlet />
+</mat-drawer-container>

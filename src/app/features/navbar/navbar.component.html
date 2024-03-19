@@ -1,0 +1,20 @@
+<mat-toolbar class="justify-content-between" color="primary">
+	<div [ngClass]="alignClass">
+		<button mat-icon-button aria-label="Abrir gaveta de navegação"
+            matTooltip="Abrir menu de navegação"
+            (click)="toggleSidebar.emit()"
+        >
+			<mat-icon>menu</mat-icon>
+		</button>
+		<span>Simulador de tráfego - TCC</span>
+	</div>
+	<div [ngClass]="alignClass">
+		<button
+			mat-icon-button
+			aria-label="Visualizar créditos"
+			matTooltip="Visualizar créditos"
+		>
+			<mat-icon>help</mat-icon>
+		</button>
+	</div>
+</mat-toolbar>
