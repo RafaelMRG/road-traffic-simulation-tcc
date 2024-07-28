@@ -183,8 +183,8 @@ table.infoTable td {
     position: absolute;
     left: 0vw;
     top: 0vmin;
-    width: 112vmin;
-    height: 100vmin;
+    width: 1280px;
+    height: 430px;
     margin-right: 0vw;
     margin-left: 0vw;
     z-index: 1;
@@ -958,7 +958,7 @@ screen and (min-resolution: 97dpi) and (min-aspect-ratio: 6/5) {
   #roadIDDiv {
     /* toggle display road IDs smartphone landscape */
     position: absolute;
-    top: 15vmin;
+    top: 30px;
     left: 2vmin;
     z-index: 2;
   }
@@ -966,7 +966,7 @@ screen and (min-resolution: 97dpi) and (min-aspect-ratio: 6/5) {
   #vehIDDiv {
     /* toggle display veh IDs smartphone landscape*/
     position: absolute;
-    top: 21vmin;
+    top: 50px;
     left: 2vmin;
     z-index: 2;
   }
@@ -976,7 +976,7 @@ screen and (min-resolution: 97dpi) and (min-aspect-ratio: 6/5) {
   /* (2f) smartphone landscape */
 
   #impressum {
-    top: 95.2%;
+    top: 380px;
     /* % takes care of scrollbars, vmin/vh not*/
   }
 

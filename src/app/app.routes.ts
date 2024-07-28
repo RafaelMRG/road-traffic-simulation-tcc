@@ -4,8 +4,8 @@ import { MultipleSimulationsPageComponent } from 'src/app/features/pages/multipl
 import { ValidationPageComponent } from 'src/app/features/pages/validation.page/validation.page.component';
 
 export const routes: Routes = [
-    {path: 'home', redirectTo: ''},
-    {path: 'multiplos', component: MultipleSimulationsPageComponent},
+    {path: 'home', redirectTo: 'simulacao'},
+    {path: 'simulacao', component: MultipleSimulationsPageComponent},
     {path: 'validacao-e-testes', component: ValidationPageComponent},
     {path: 'creditos', component: CreditsPageComponent},
 ];

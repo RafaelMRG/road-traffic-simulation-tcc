@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MultiSimService } from './multi-sim.service';
+import { SimService } from './sim.service';
 
 describe('MultiSimService', () => {
-  let service: MultiSimService;
+  let service: SimService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MultiSimService);
+    service = TestBed.inject(SimService);
   });
 
   it('should be created', () => {

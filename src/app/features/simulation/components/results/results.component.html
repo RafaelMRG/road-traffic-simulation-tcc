@@ -1,1 +1,11 @@
-<p>results works!</p>
+<div class="container my-4">
+  <div class="row mb-3">
+    <h2>Resultados</h2>
+  </div>
+  @for(result of results; track result.resultName){
+    <div class="row">
+      <h5 class="m-0">{{result.resultName}}</h5>
+      <app-single-output [result]="result"></app-single-output>
+    </div>
+  }
+</div>

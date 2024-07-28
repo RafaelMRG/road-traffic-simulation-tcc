@@ -7,17 +7,18 @@ window.addEventListener(
 
 		const message = event.data;
 		if (!message || !message.type) return;
-		console.log("Message received from parent:", message);
 
 		// Process the message received from the parent Angular application
 		if (message.type === "function") {
-			console.log("message of type function getting called from angular");
 			isStartStop(message.data);
 			isRestart(message.data);
+			isSetSliders(message);
+			isStartOrStop(message.data);
+			isStartAutomatedSimulation(message);
+			isStartNextIteration(message);
 		}
 
 		if (message.type === "object" && typeof message.data === "object") {
-			console.log("message of type object getting called from angular");
 		}
 
 		// Example of sending a message back to the parent Angular application
@@ -25,9 +26,12 @@ window.addEventListener(
 	false
 );
 
-function sendDataToAngular(data, type) {
-	if (typeof type !== "string") throw new Error("Type of data is not string");
-	window.parent.postMessage({ type: type, data: data }, "*");
+function sendDataToAngular(data, type, functionName) {
+	if (functionName) {
+		window.parent.postMessage({ type, data, functionName }, "*");
+	} else {
+		window.parent.postMessage({ type, data }, "*");
+	}
 }
 
 const isStartStop = function (data) {
@@ -44,20 +48,45 @@ const isRestart = function (data) {
 	}
 };
 
+const isSetSliders = function (message) {
+	if (message.data != undefined && message.functionName === 'setSliders') {
+		this[message.functionName](...message.data);
+	}
+}
+
+const isStartOrStop = function (data) {
+	if (data === 'stop') {
+		stopSim();
+	} else if (data === 'start') {
+		startSim();
+	}
+}
+
+const isStartAutomatedSimulation = function (message) {
+	if (message.functionName === 'automatedSimulation') {
+		startAutomatedSimulation(message.data);
+	}
+}
+
+const isStartNextIteration = function (message) {
+	if (message.functionName === 'nextIteration') {
+		nextIteration(message.data);
+	}
+}
+
 const _updateIsStoppedState = function () {
-	printAvgCarTimes();
-	vehTimings = {};
-	sendDataToAngular({ isStopped: isStopped }, "state");
+	sendDataToAngular({ isStopped }, "state");
 };
 
-const printAvgCarTimes = function () {
+const getAvgCarTimes = function () {
 	const deltas = Object.values(vehTimings)
 		.filter(nans)
 		.map((timing) => timing.delta);
 
 	const sum = deltas.reduce((a, b) => a + b, 0);
 	const avg = sum / deltas.length || 0;
-	console.log(avg);
+	console.log('Tempo médio das rotas: ' + avg)
+	return avg;
 };
 
 const nans = function (vehTiming) {

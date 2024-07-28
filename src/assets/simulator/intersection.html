@@ -62,7 +62,7 @@ Show vehicle IDs</div>
 <!-- ############################################## -->
 
 <!-- "title" text counts as index, so valid options start with 1-->
-<div id="priorityDiv">
+<!-- <div id="priorityDiv">
     <select id="prioritySelect"
 	    onchange="changeTrafficRules(this.selectedIndex-1)">
         <option value="" selected disabled hidden>Traffic Rules</option>
@@ -70,11 +70,11 @@ Show vehicle IDs</div>
         <option> Right Priority</option>
         <option> Signalized</option>
     </select>
-</div>
+</div> -->
 
 
 <!-- "title" text counts as index, so valid options start with 1-->
-<div id="ODDiv">
+<!-- <div id="ODDiv">
     <select id="ODSelect"
 <	    onchange="setTotalLaneNumber(this.selectedIndex)">
   <option value="" selected disabled hidden>Number of Lanes</option>
@@ -85,7 +85,7 @@ Show vehicle IDs</div>
   <option> 3 main, 2 secondary lanes</option>
   <option> 3 main, 3 secondary lanes</option>
 </select>
-</div>
+</div> -->
 
 
 <!-- ############################################## -->
@@ -129,7 +129,7 @@ Show vehicle IDs</div>
 
 <div id="impressum">
   <table class="infoTable"> <TR>
-    <td> <a href="impressum.html"> &copy; Martin Treiber</a></td>
+    <td> <a href="https://www.traffic-simulation.de/"> &copy; Martin Treiber</a></td>
   </TR></table>
 </div>
 
@@ -153,7 +153,7 @@ Show vehicle IDs</div>
 
 <div id="sliders">
 <center>
-
+<!-- 
 <h3>Traffic Flow and General</h3>
 
 <table id="mainTable" border="0" cellspacing="1" cellpadding="0" >
@@ -180,7 +180,7 @@ Show vehicle IDs</div>
 </tr>
 
 
-<!-- only in development, crashes! -->
+
 
 
 <tr>
@@ -227,7 +227,7 @@ Show vehicle IDs</div>
   <td> <div id="slider_IDM_aVal"></div> </td>
 </tr>
 </table>
-
+ -->
 <!--
 <h3>Lane-Changing Behavior</h3>
 
@@ -269,32 +269,7 @@ Show vehicle IDs</div>
 <!-- ############################################## -->
 
 <br>
-<div id="infotext">
-<h1>Intersection</h1>
-<ul>
-  <li>Standard scenario: not signalized priority and secondary road,
-  only straight-ahead traffic</li>
 
-  <li>Change the traffic rules and the number of lanes with the pulldown
-    menus</li>
-
-  <li>Change the size of the intersecting roads with the second menu</li>
-
-  <li>Change the traffic and the origin-destination relations with
-    the sliders</li>
-    
-  <li>Observe that, with Right Priority, traffic gets in a gridlock
-  unless demand is very light. Resolve it by changing the traffic
-  rules (right priority only makes sense for single-lane directional
-    roads)</li>
-
-  <li> In the mainroad and signalized scenarios, any remaining
-  ambiguities (left-turning mainroad vehicles encounter mainroad
-  vehicles in the 
-  opposite drection, left turns if there are traffic lights) is
-  resolved by the Right Priority rule
-</ul>  
-</div>
 
 </center>
 </div>   <!-- id="sliders">-->
@@ -311,6 +286,7 @@ Show vehicle IDs</div>
 <!-- specific scripts; position below any simulation elements ! -->
 <!-- ########################################################## -->
 
+<script src="js/sliders.js"></script>
 <script src="js/angular-interface.js"></script>
 <script src="js/seedrandom.min.js"></script> <!-- random w seed debug -->
 
@@ -331,7 +307,9 @@ Show vehicle IDs</div>
 <script src="js/debug.js"></script>
 <script src="js/stationaryDetector.js"></script> 
 
+<script src="js/external-light-control.js"></script>
 <!-- PROJ--> <script src="js/intersection.js"></script> 
+<script src="js/simulation-handler.js"></script>
 
 </body>
 </html>

@@ -36,14 +36,9 @@ export class AppComponent {
 
 	navButtons: Navigation[] = [
 		{
-			icon: 'deployed_code_history',
-			title: 'Simulação única',
-			url: '',
-		},
-		{
 			icon: 'account_tree',
-			title: 'Simulação múltipla',
-			url: 'multiplos',
+			title: 'Simulação',
+			url: 'simulacao',
 		},
 		{
 			icon: 'experiment',

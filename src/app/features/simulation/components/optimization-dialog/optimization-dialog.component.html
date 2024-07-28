@@ -1,0 +1,124 @@
+<h1 mat-dialog-title>Configuração de operação de otimização</h1>
+<div mat-dialog-content class="py-3">
+  <div>
+    <form [formGroup]="runSettings">
+      <div class="row">
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-label>N° de iterações</mat-label>
+            <input matInput type="number" formControlName="iterations">
+            @if (runSettings.controls.iterations.value !== 4) {
+            <button matSuffix mat-icon-button aria-label="Limpar" (click)="runSettings.controls.iterations.setValue(4)">
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-label>Tempo simulado</mat-label>
+            <input #simulatedTime matInput type="number" formControlName="simulatedTime">
+            @if (runSettings.controls.simulatedTime.value !== 120) {
+            <button matSuffix mat-icon-button aria-label="Limpar"
+              (click)="runSettings.controls.simulatedTime.setValue(120)">
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-divider class="my-3"></mat-divider>
+
+      <div class="row">
+        <h4 class="text-black">Configuração inicial dos cruzamentos</h4>
+      </div>
+      
+      <div class="row">
+        <h5>Semáforo 1</h5>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <p>Duração do vermelho: {{ runSettings.getRawValue().semaphore1RedDuration }}</p>
+          <mat-slider max="120" min="10" discrete>
+            <input matSliderThumb formControlName="semaphore1RedDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Duração do verde: {{ runSettings.getRawValue().semaphore1GreenDuration }} </p>
+          <mat-slider max="120" min="10" discrete>
+            <input matSliderThumb formControlName="semaphore1GreenDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Offset de início do ciclo: {{ runSettings.getRawValue().semaphore1CycleStartTime }}</p>
+          <mat-slider max="300" min="0" discrete>
+            <input matSliderThumb formControlName="semaphore1CycleStartTime">
+          </mat-slider>
+        </div>
+      </div>
+
+      <div class="row">
+        <h5>Semáforo 2</h5>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <p>Duração do vermelho: {{ runSettings.getRawValue().semaphore2RedDuration }}</p>
+          <mat-slider max="120" min="10" discrete>
+            <input matSliderThumb formControlName="semaphore2RedDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Duração do verde: {{ runSettings.getRawValue().semaphore2GreenDuration }} </p>
+          <mat-slider max="120" min="10" discrete>
+            <input matSliderThumb formControlName="semaphore2GreenDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Offset de início do ciclo: {{ runSettings.getRawValue().semaphore2CycleStartTime }}</p>
+          <mat-slider max="300" min="0" discrete>
+            <input matSliderThumb formControlName="semaphore2CycleStartTime">
+          </mat-slider>
+        </div>
+      </div>
+
+      <div class="row">
+        <h5>Semáforo 3</h5>
+      </div>
+
+
+      <div class="row">
+        <div class="col-4">
+          <p>Duração do vermelho: {{ runSettings.getRawValue().semaphore3RedDuration }}</p>
+          <mat-slider max="120" min="10" discrete>
+            <input matSliderThumb formControlName="semaphore3RedDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Duração do verde: {{ runSettings.getRawValue().semaphore3GreenDuration }} </p>
+          <mat-slider max="120" min="10" discrete>
+            <input matSliderThumb formControlName="semaphore3GreenDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Offset de início do ciclo: {{ runSettings.getRawValue().semaphore3CycleStartTime }}</p>
+          <mat-slider max="300" min="0" discrete>
+            <input matSliderThumb formControlName="semaphore3CycleStartTime">
+          </mat-slider>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="row justify-content-around">
+    <button (click)="startSimulation()" mat-raised-button color="primary" mat-dialog-close>Iniciar simulação</button>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="warn" mat-dialog-close>Fechar</button>
+</div>

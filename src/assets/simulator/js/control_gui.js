@@ -70,9 +70,24 @@ function myStartStopFunction() {
 	if (isStopped) {
 		isStopped = false;
 		myRun = setInterval(main_loop, 1000 / fps);
+		resetTimings();
 	} else {
 		isStopped = true;
 	}
+	console.log(time)
+}
+
+function stopSim() {
+	clearInterval(myRun);
+	isStopped = true;
+	_updateIsStoppedState();
+}
+
+function startSim() {
+	clearInterval(myRun);
+	isStopped = false;
+	myRun = setInterval(main_loop, 1000 / fps);
+	_updateIsStoppedState();
 }
 
 //################################################################
@@ -84,6 +99,7 @@ function myStartStopFunction() {
 function myRestartFunction() {
 	Math.seedrandom(42);
 	console.log("in Math.seedrandom(42) myRestartFunction");
+
 	time = 0;
 	itime = 0;
 
@@ -115,10 +131,12 @@ function myRestartFunction() {
 
 	// activate thread if stopped
 
-	if (isStopped) {
+	/* if (isStopped) {
 		isStopped = false;
 		myRun = setInterval(main_loop, 1000 / fps);
-	}
+	} */
+	stopSim();
+
 
 	if (true) {
 		console.log("end myRestartFunction():");
@@ -1034,6 +1052,7 @@ var factor_T_truck = 1.1;
 // these are now distributed by deep copy over the vehicles of the roads
 
 function updateModels() {
+	logColor("updating models ...");
 	var v0 = Math.min(IDM_v0, speedL);
 	var v0_truck = Math.min(IDM_v0, speedL_truck);
 	var T_truck = factor_T_truck * IDM_T;

@@ -44,6 +44,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import 'bootstrap/scss/bootstrap';
 
 
+button.mdc-button {
+  width: max-content;
+}
+
 .error-notification {
   & .mdc-snackbar__surface{
     background-color: #f44336 !important; /* Red */

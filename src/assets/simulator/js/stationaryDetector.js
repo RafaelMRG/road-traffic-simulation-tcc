@@ -55,6 +55,10 @@ function stationaryDetector(road, u, dtAggr) {
 
 var vehTimings = {};
 
+function resetTimings() {
+	this.vehTimings = {};
+}
+
 stationaryDetector.prototype.update = function (time, dt) {
 	const isDetectorAtRoadStart = this.u < 0.5 * this.road.roadLen;
 	var vehNear = isDetectorAtRoadStart
@@ -68,8 +72,7 @@ stationaryDetector.prototype.update = function (time, dt) {
 					return Math.abs(this.times[1] - this.times[0]);
 				},
 			};
-			vehTimings[vehNear.id].times[this.i] ??= time;
-			console.log(vehTimings);
+			vehTimings[vehNear.id].times.push(time);
 		}
 
 		// if desired, add single-vehicle data record here
@@ -220,7 +223,7 @@ stationaryDetector.prototype.display = function (textsize) {
 	ctx.fillStyle = "rgb(255,255,255)";
 	ctx.fillRect(
 		xPixCenter - 0.5 * boxWidth,
-		yPixCenter - 0.5 * boxHeight,
+		yPixCenter - 3.5 * boxHeight,
 		boxWidth,
 		boxHeight
 	);
@@ -228,16 +231,16 @@ stationaryDetector.prototype.display = function (textsize) {
 	ctx.fillText(
 		flowStr,
 		xPixCenter - 0.46 * boxWidth,
-		yPixCenter - 0.2 * boxHeight
+		yPixCenter - 3.2 * boxHeight
 	);
 	ctx.fillText(
 		speedStr,
 		xPixCenter - 0.46 * boxWidth,
-		yPixCenter + 0.1 * boxHeight
+		yPixCenter - 2.88 * boxHeight
 	);
 	ctx.fillText(
 		densStr,
 		xPixCenter - 0.46 * boxWidth,
-		yPixCenter + 0.4 * boxHeight
+		yPixCenter - 2.6 * boxHeight
 	);
 };

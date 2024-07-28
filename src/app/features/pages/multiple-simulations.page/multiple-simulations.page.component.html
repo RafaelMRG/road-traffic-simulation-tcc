@@ -1,15 +1,160 @@
-<div class="p-3 d-flex flex-column gap-2 ">
-	<iframe
-		#legacyFrame
-		src="assets/simulator/intersection.html"
-		style="width: 100%; height: 80vh"
-	></iframe>
-  <div class="position-absolute d-flex gap-3" style="left: 68vmin; top: 10vmin">
-    <button class="mat-elevation-z2" mat-flat-button color="secondary" (click)="startStopSim()">
-      <mat-icon [class.text-warning]="states.isStopped" [class.text-danger]="!states.isStopped">{{states.isStopped ? 'play_arrow' : 'pause'}}</mat-icon>
-      {{states.isStopped ? 'Start' : 'Stop'}}
-    </button>
-    <button class="mat-elevation-z2" mat-flat-button color="warn" (click)="restartSim()">Restart</button>
+<div class="p-3 d-flex flex-column gap-2">
+  <div class="d-flex p-3 gap-2 border border-black border-opacity-25 rounded-3 mat-elevation-z4" style="width: max-content">
+  
+    <!-- CONTROLE START STOP -->
+    <mat-card style="width: max-content;">
+      <mat-card-header>
+        <mat-card-title>Start/Stop Controls</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="py-3">
+        <div class="d-flex flex-column gap-3">
+          <button [disabled]="isAutoControl" (click)="openOptimizationDialog()" mat-flat-button color="primary"><mat-icon>settings</mat-icon> Iniciar otimização de semáforo</button>
+          <div class="d-flex gap-3">
+            <button
+              class="mat-elevation-z2 flex-grow-1"
+              mat-flat-button
+              color="secondary"
+              (click)="simCommsService.startStopSim()"
+              [disabled]="isAutoControl"
+            >
+              <mat-icon
+                [class.text-warning]="states.isStopped"
+                [class.text-danger]="!states.isStopped"
+                >{{ states.isStopped ? "play_arrow" : "pause" }}</mat-icon
+              >
+              {{ states.isStopped ? "Start" : "Stop" }}
+            </button>
+            <button
+              class="mat-elevation-z2 flex-grow-1"
+              mat-flat-button
+              color="warn"
+              (click)="simCommsService.restartSim()"
+              [disabled]="isAutoControl"
+            >
+              Restart
+            </button>
+          </div>
+        </div>
+        @if (isAutoControl){
+          <mat-divider class="my-4"></mat-divider>
+          <div class="d-flex align-items-center flex-column gap-3">
+            <strong class="text-center" style="max-width: 14rem; display: block;">Modo de auto controle está ligado, botões desativados</strong>
+            @if (!simService.simulationIsDone){
+              <button mat-raised-button color="warn">Forçar parada (WIP)</button>
+              <button mat-flat-button color="primary" class="w-100">Iteração: {{simConfigService.currentIteration}} de {{ simConfigService.simConfig.iterations }}</button>
+            } @else {
+              <button mat-flat-button color="primary"><mat-icon class="text-warning fw-bolder">done</mat-icon> Simulação terminou</button>
+            }
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+    
+    <!-- CONTROLE DE TRÁFEGO -->
+    <mat-card style="width: max-content;">
+      <mat-card-header>
+        <mat-card-title>Controle de tráfego</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="py-3">
+        <div class="d-flex gap-xl-5 gap-lg-1">
+          <form [formGroup]="simConfigService.trafficControl">
+            
+            <div>
+              <h6 class="mb-0">Fluxo da estrada principal</h6>
+              <mat-slider min="0" max="3000" step="1" discrete [disabled]="isAutoControl">
+                <input matSliderThumb formControlName="mainInflow">
+              </mat-slider>
+              <strong>{{simConfigService.trafficControl.controls['mainInflow'].value}} {{units.veiPerHour}}</strong>
+            </div>
+            
+            
+            <div>
+              <h6 class="mb-0">Fluxo da estrada secundária</h6>
+              <mat-slider min="0" max="1600" step="1" discrete [disabled]="isAutoControl">
+                <input matSliderThumb formControlName="secondaryInflow">
+              </mat-slider>
+              <strong>{{ simConfigService.trafficControl.controls['secondaryInflow'].value}} {{units.veiPerHour}}</strong>
+            </div>
+            
+            
+            <div>
+              <h6 class="mb-0">Porcentagem de conversão a direita</h6>
+              <mat-slider min="0" max="100" step="1" discrete [disabled]="isAutoControl">
+                <input matSliderThumb formControlName="percentRight">
+              </mat-slider>
+              <strong>{{simConfigService.trafficControl.controls['percentRight'].value }} {{units.percentage}}</strong>
+            </div>
+            
+            
+            <div>
+              <h6 class="mb-0">Porcentagem de conversão a Esquerda</h6>
+              <mat-slider min="0" max="100" step="1" discrete [disabled]="isAutoControl">
+                <input matSliderThumb formControlName="percentLeft">
+              </mat-slider>
+              <strong>{{simConfigService.trafficControl.controls['percentLeft'].value }} {{units.percentage}}</strong>
+            </div>
+            
+            
+            <div>
+              <h6 class="mb-0">Velocidade do tempo</h6>
+              <mat-slider min="0.2" max="25" step="0.1" discrete [disabled]="isAutoControl">
+                <input matSliderThumb formControlName="timelapse">
+              </mat-slider>
+              <strong>{{simConfigService.trafficControl.controls['timelapse'].value }} {{units.time}}</strong>
+            </div>
+            
+          </form>
+          
+          
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
+    
+    <!-- CONTROLE DE MODELO -->
+    <mat-card style="width: max-content;">
+      <mat-card-header>
+        <mat-card-title>Controle de tráfego</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="py-3">
+        <div class="d-flex gap-xl-5 gap-lg-1">
+          <form [formGroup]="simConfigService.carFollowingControl">
+          
+            <div>
+              <h6 class="mb-0">Velocidade máxima</h6>
+              <mat-slider min="20" max="120" step="1" discrete [disabled]="isAutoControl">
+                <input matSliderThumb formControlName="maxSpeed">
+              </mat-slider>
+              <strong>{{simConfigService.carFollowingControl.controls['maxSpeed'].value}} {{units.speed}}</strong>
+            </div>
+          
+            <div>
+              <h6 class="mb-0">Separação dos veículos</h6>
+              <mat-slider min="0.6" max="3" step="0.1" discrete [disabled]="isAutoControl">
+                <input matSliderThumb formControlName="timeGap">
+              </mat-slider>
+              <strong>{{simConfigService.carFollowingControl.controls['timeGap'].value}} {{units.time}}</strong>
+            </div>
+          
+            <div>
+              <h6 class="mb-0">Aceleração máxima</h6>
+              <mat-slider min="0.3" max="4" step="0.1" discrete [disabled]="isAutoControl">
+                <input matSliderThumb formControlName="maxAccel">
+              </mat-slider>
+              <strong>{{simConfigService.carFollowingControl.controls['maxAccel'].value}} {{units.accel}}</strong>
+            </div>
+          
+          </form>
+          
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
-</div>
 
+  <iframe
+    #legacyFrame
+    (load)="initRunConfig()"
+    src="assets/simulator/intersection.html"
+    style="width: 1290px; height: 510px"
+  ></iframe>
+</div>

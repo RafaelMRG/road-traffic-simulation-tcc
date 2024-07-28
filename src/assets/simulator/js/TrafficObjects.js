@@ -297,8 +297,8 @@ TrafficObjects.prototype.draw=function(){
 
     var obj=this.trafficObj[i];
     //  such that speedlimit signs are round on chrome 
-    var wPixPassive=this.wPix*((obj.type==='speedLimit') ? 0.9:1);
-    var hPixPassive=this.hPix*((obj.type==='speedLimit') ? 1.2:1);
+    var wPixPassive=this.wPix*((obj.type==='speedLimit') ? 0.9:0.8);
+    var hPixPassive=this.hPix*((obj.type==='speedLimit') ? 1.2:0.8);
     var wPixActive=this.active_scaleFact*wPixPassive;
     var hPixActive=this.active_scaleFact*hPixPassive;
 
@@ -308,7 +308,6 @@ TrafficObjects.prototype.draw=function(){
 
     if((obj.isActive)
        &&((obj.type==="trafficLight")||(obj.type==="speedLimit"))){
-
       var obj=this.trafficObj[i];
       var road=obj.road;
 
