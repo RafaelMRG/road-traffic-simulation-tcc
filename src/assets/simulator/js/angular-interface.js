@@ -16,6 +16,7 @@ window.addEventListener(
 			isStartOrStop(message.data);
 			isStartAutomatedSimulation(message);
 			isStartNextIteration(message);
+			isEndGeneration(message);
 		}
 
 		if (message.type === "object" && typeof message.data === "object") {
@@ -74,20 +75,36 @@ const isStartNextIteration = function (message) {
 	}
 }
 
+const isEndGeneration = function (message) {
+	if (message.functionName === 'endGeneration') {
+		console.log('ending')
+		simulationConfig = undefined;
+	}
+}
+
 const _updateIsStoppedState = function () {
 	sendDataToAngular({ isStopped }, "state");
 };
 
-const getAvgCarTimes = function () {
-	const deltas = Object.values(vehTimings)
+const getFilteredCars = function () {
+	return Object.values(vehTimings)
 		.filter(nans)
 		.map((timing) => timing.delta);
+}
+
+const getAvgCarTimes = function () {
+	const deltas = getFilteredCars();
 
 	const sum = deltas.reduce((a, b) => a + b, 0);
 	const avg = sum / deltas.length || 0;
 	console.log('Tempo médio das rotas: ' + avg)
 	return avg;
 };
+
+const getTotalVehicles = function () {
+	return getFilteredCars().length
+}
+
 
 const nans = function (vehTiming) {
 	return !isNaN(vehTiming.delta);

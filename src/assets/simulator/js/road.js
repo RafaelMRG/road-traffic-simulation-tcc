@@ -276,7 +276,7 @@ road.prototype.initRegularVehicles = function (
     this.nLanes * fracTruck > 1
       ? (this.nLanes * fracTruck - 1) / (this.nLanes - 1)
       : 0;
-  console.log(
+  if (false) console.log(
     "road.initRegularVehicles: fracTruckRight=",
     fracTruckRight,
     " fracTruckRest=",
@@ -374,7 +374,7 @@ road.prototype.subtractOneLane = function () {
 //######################################################################
 
 road.prototype.writeVehicles = function (umin, umax) {
-  console.log(
+  if (false) console.log(
     "\nin road.writeVehicles(): itime=",
     itime,
     " roadID=",
@@ -388,7 +388,7 @@ road.prototype.writeVehicles = function (umin, umax) {
   var uminLoc = typeof umin !== "undefined" ? umin : 0;
   var umaxLoc = typeof umax !== "undefined" ? umax : this.roadLen;
 
-  for (var i = 0; i < this.veh.length; i++) {
+  for (var i = 0; i < this.veh.length && false; i++) {
     if (this.veh[i].u >= uminLoc && this.veh[i].u <= umaxLoc) {
       console.log(
         " veh[" +

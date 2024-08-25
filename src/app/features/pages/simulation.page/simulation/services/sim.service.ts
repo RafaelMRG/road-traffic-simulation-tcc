@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
+import { SimCommsService } from "src/app/features/pages/simulation.page/simulation/services/sim-comms.service";
+import { SimConfigControlService } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
 import { SnackbarService } from "src/app/features/services/snackbar.service";
-import { SimCommsService } from "src/app/features/simulation/services/sim-comms.service";
-import { SimConfigControlService } from "src/app/features/simulation/services/sim-config-control.service";
 
 @Injectable({
 	providedIn: "root",
@@ -35,7 +35,9 @@ export class SimService {
 		carsTotal: number;
 		avgSpeed: number;
 		iterateNext: boolean;
+		occupationRate: number;
 	}) {
+		console.table(data);
 		// Send data to backend, check if iteration should end prematurely
 		const post = () => {
 			this.simCommsSvc.postMessage({
@@ -45,6 +47,14 @@ export class SimService {
 			});
 			this.simConfSvc.currentIteration++;
 		};
+		const endSimulationFrameSide = () => {
+			this.simCommsSvc.postMessage({
+				type: "function",
+				data: undefined,
+				functionName: "endGeneration"
+			})
+		}
+		
 		if (data.iterateNext === false) {
 			this.snackbar.showNotification(
 				"Simulação terminou, processando dados ...",
@@ -53,6 +63,7 @@ export class SimService {
 			this.simulationIsDone = true;
 			this.simConfSvc.isAutomatedSimulation = false;
 			this.simConfSvc.currentIteration = 0;
+			endSimulationFrameSide();
 			return;
 		}
 		this.snackbar.showNotification(
@@ -63,6 +74,7 @@ export class SimService {
 	}
 
 	startSimulation() {
+		console.log(this.simConfSvc.simConfig);
 		this.simConfSvc.currentIteration = 1;
 		this.simConfSvc.isAutomatedSimulation = true;
 		this.simCommsSvc.restartSim();

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SimCommsService } from 'src/app/features/simulation/services/sim-comms.service';
+import { SimCommsService } from 'src/app/features/pages/simulation.page/simulation/services/sim-comms.service';
 
 @Injectable({
 	providedIn: "root",
@@ -20,8 +20,10 @@ export class SimConfigControlService {
 	isAutomatedSimulation = false;
 
 	simConfig: SimConfiguration = {
-		iterations: 2,
+		population: 2,
 		simulatedTime: 60,
+		mutationRate: 0.3,
+		selecteds: 2,
 		lightsConfig: [
 			{ cycleStartTime: 0, greenDuration: 30, redDuration: 30 },
 			{ cycleStartTime: 15, greenDuration: 30, redDuration: 30 },
@@ -85,8 +87,10 @@ export class SimConfigControlService {
 
 
 export type SimConfiguration = {
-	simulatedTime: number;
-	iterations: number;
+	simulatedTime: number; // int
+	population: number; // int
+	mutationRate: number; // float 
+	selecteds: number; // int
 	slidersPatch: {
 		trafficControl: {
 			mainInflow: number;

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MultipleSimulationsPageComponent } from 'src/app/features/pages/multiple-simulations.page/multiple-simulations.page.component';
 
 @Injectable({
 	providedIn: "root",

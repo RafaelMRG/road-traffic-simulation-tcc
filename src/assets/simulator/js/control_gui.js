@@ -70,7 +70,6 @@ function myStartStopFunction() {
 	if (isStopped) {
 		isStopped = false;
 		myRun = setInterval(main_loop, 1000 / fps);
-		resetTimings();
 	} else {
 		isStopped = true;
 	}
@@ -138,7 +137,7 @@ function myRestartFunction() {
 	stopSim();
 
 
-	if (true) {
+	if (false) {
 		console.log("end myRestartFunction():");
 		for (var ir = 0; ir < network.length; ir++) {
 			network[ir].inVehBuffer = network[ir].inVehBufferInit;
@@ -665,7 +664,7 @@ if (document.getElementById("slider_fracScooter") !== null) {
 
 // density slider
 
-var density = 0.03; // 0.10
+var density = 1; // 0.10
 var speedInit = 20; // also needed for initializing density
 
 var slider_density;

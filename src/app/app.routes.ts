@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { CreditsPageComponent } from 'src/app/features/pages/credits.page/credits.page.component';
-import { MultipleSimulationsPageComponent } from 'src/app/features/pages/multiple-simulations.page/multiple-simulations.page.component';
+import { MultipleSimulationsPageComponent } from 'src/app/features/pages/simulation.page/simulation.page.component';
 import { ValidationPageComponent } from 'src/app/features/pages/validation.page/validation.page.component';
 
 export const routes: Routes = [

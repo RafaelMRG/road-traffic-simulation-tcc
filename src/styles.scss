@@ -82,3 +82,7 @@ button.mdc-button {
     & * {color: white !important;}
   }
 }
+
+div[mat-dialog-title] {
+  height: max-content;
+}

@@ -1,3 +1,4 @@
+import { JsonPipe } from "@angular/common";
 import {
 	AfterViewInit,
 	Component,
@@ -7,20 +8,19 @@ import {
 	OnInit,
 	ViewChild,
 } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { SnackbarService } from "src/app/features/services/snackbar.service";
 import { MatCardModule } from "@angular/material/card";
-import { MatSliderModule } from "@angular/material/slider";
-import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { JsonPipe } from "@angular/common";
-import { Subscription } from "rxjs";
-import { MatDividerModule } from "@angular/material/divider";
-import { SimService } from "src/app/features/simulation/services/sim.service";
-import { SimConfigControlService } from "src/app/features/simulation/services/sim-config-control.service";
-import { SimCommsService } from "src/app/features/simulation/services/sim-comms.service";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
-import { OptimizationDialogComponent } from "src/app/features/simulation/components/optimization-dialog/optimization-dialog.component";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatIconModule } from "@angular/material/icon";
+import { MatSliderModule } from "@angular/material/slider";
+import { Subscription } from "rxjs";
+import { LightsSettingsDialogComponent } from "src/app/features/pages/simulation.page/simulation/components/lights-settings-dialog/lights-settings-dialog.component";
+import { OptimizationDialogComponent } from "src/app/features/pages/simulation.page/simulation/components/optimization-dialog/optimization-dialog.component";
+import { SimCommsService } from "src/app/features/pages/simulation.page/simulation/services/sim-comms.service";
+import { SimConfigControlService } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
+import { SimService } from "src/app/features/pages/simulation.page/simulation/services/sim.service";
 
 @Component({
 	selector: "app-multiple-simulations.page",
@@ -35,8 +35,8 @@ import { OptimizationDialogComponent } from "src/app/features/simulation/compone
 		MatDividerModule,
 		MatDialogModule,
 	],
-	templateUrl: "./multiple-simulations.page.component.html",
-	styleUrl: "./multiple-simulations.page.component.scss",
+	templateUrl: "./simulation.page.component.html",
+	styleUrl: "./simulation.page.component.scss",
 })
 export class MultipleSimulationsPageComponent
 	implements OnInit, OnDestroy, AfterViewInit
@@ -137,10 +137,21 @@ export class MultipleSimulationsPageComponent
 		}
 	}
 
+	private readonly DEFAULT_MODAL_CONFIG = {
+		width: "80vw",
+		height: "80vh",
+	};
+
 	openOptimizationDialog() {
-		this.dialog.open(OptimizationDialogComponent, {
-			width: "80vw",
-			height: "80vh",
-		});
+		this.dialog.open(
+			OptimizationDialogComponent, 
+			this.DEFAULT_MODAL_CONFIG);
+	}
+
+	openLightsSettings() {
+		this.dialog.open(
+			LightsSettingsDialogComponent,
+			this.DEFAULT_MODAL_CONFIG
+		);
 	}
 }

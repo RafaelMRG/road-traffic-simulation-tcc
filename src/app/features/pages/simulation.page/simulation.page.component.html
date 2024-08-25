@@ -8,7 +8,8 @@
       </mat-card-header>
       <mat-card-content class="py-3">
         <div class="d-flex flex-column gap-3">
-          <button [disabled]="isAutoControl" (click)="openOptimizationDialog()" mat-flat-button color="primary"><mat-icon>settings</mat-icon> Iniciar otimização de semáforo</button>
+          <button class="w-auto" [disabled]="isAutoControl" (click)="openLightsSettings()" mat-flat-button color="primary"><mat-icon>traffic</mat-icon> Configurar semáforos</button>
+          <button class="w-auto" [disabled]="isAutoControl" (click)="openOptimizationDialog()" mat-flat-button color="primary"><mat-icon>settings</mat-icon> Iniciar otimização</button>
           <div class="d-flex gap-3">
             <button
               class="mat-elevation-z2 flex-grow-1"
@@ -41,7 +42,7 @@
             <strong class="text-center" style="max-width: 14rem; display: block;">Modo de auto controle está ligado, botões desativados</strong>
             @if (!simService.simulationIsDone){
               <button mat-raised-button color="warn">Forçar parada (WIP)</button>
-              <button mat-flat-button color="primary" class="w-100">Iteração: {{simConfigService.currentIteration}} de {{ simConfigService.simConfig.iterations }}</button>
+              <button mat-flat-button color="primary" class="w-100">Iteração: {{simConfigService.currentIteration}} de {{ simConfigService.simConfig.population }}</button>
             } @else {
               <button mat-flat-button color="primary"><mat-icon class="text-warning fw-bolder">done</mat-icon> Simulação terminou</button>
             }
@@ -61,7 +62,7 @@
             
             <div>
               <h6 class="mb-0">Fluxo da estrada principal</h6>
-              <mat-slider min="0" max="3000" step="1" discrete [disabled]="isAutoControl">
+              <mat-slider min="0" max="12000" step="1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="mainInflow">
               </mat-slider>
               <strong>{{simConfigService.trafficControl.controls['mainInflow'].value}} {{units.veiPerHour}}</strong>
@@ -130,7 +131,7 @@
           
             <div>
               <h6 class="mb-0">Separação dos veículos</h6>
-              <mat-slider min="0.6" max="3" step="0.1" discrete [disabled]="isAutoControl">
+              <mat-slider min="0.1" max="3" step="0.1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="timeGap">
               </mat-slider>
               <strong>{{simConfigService.carFollowingControl.controls['timeGap'].value}} {{units.time}}</strong>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ResultsComponent } from 'src/app/features/simulation/components/results/results.component';
+import { ResultsComponent } from 'src/app/features/pages/simulation.page/simulation/components/results/results.component';
 
 @Component({
   selector: 'app-validation.page',

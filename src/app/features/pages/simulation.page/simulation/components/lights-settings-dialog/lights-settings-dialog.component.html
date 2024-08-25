@@ -1,0 +1,90 @@
+<h2 mat-dialog-title>Configuração dos cruzamentos</h2>
+<div mat-dialog-content>
+  <h6>Essa configuração será utilizada como a inicial em um processamento de otimização</h6>
+  <div class="py-3">
+    <form [formGroup]="lightSettingsSvc.runSettings">
+
+      <div class="row">
+        <h5>Semáforo 1</h5>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <p>Duração do vermelho: {{ lightSettingsSvc.runSettings.getRawValue().semaphore1RedDuration }}s</p>
+          <mat-slider [max]="lightSettingsSvc.RED_MAX" [min]="lightSettingsSvc.RED_MIN" discrete>
+            <input matSliderThumb formControlName="semaphore1RedDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Duração do verde: {{ lightSettingsSvc.runSettings.getRawValue().semaphore1GreenDuration }}s </p>
+          <mat-slider [max]="lightSettingsSvc.GREEN_MAX" [min]="lightSettingsSvc.GREEN_MIN" discrete>
+            <input matSliderThumb formControlName="semaphore1GreenDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Offset de início do ciclo: {{ lightSettingsSvc.runSettings.getRawValue().semaphore1CycleStartTime }}s</p>
+          <mat-slider max="300" min="0" discrete>
+            <input matSliderThumb formControlName="semaphore1CycleStartTime">
+          </mat-slider>
+        </div>
+      </div>
+
+      <div class="row">
+        <h5>Semáforo 2</h5>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <p>Duração do vermelho: {{ lightSettingsSvc.runSettings.getRawValue().semaphore2RedDuration }}s</p>
+          <mat-slider [max]="lightSettingsSvc.RED_MAX" [min]="lightSettingsSvc.RED_MIN" discrete>
+            <input matSliderThumb formControlName="semaphore2RedDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Duração do verde: {{ lightSettingsSvc.runSettings.getRawValue().semaphore2GreenDuration }}s </p>
+          <mat-slider [max]="lightSettingsSvc.GREEN_MAX" [min]="lightSettingsSvc.GREEN_MIN" discrete>
+            <input matSliderThumb formControlName="semaphore2GreenDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Offset de início do ciclo: {{ lightSettingsSvc.runSettings.getRawValue().semaphore2CycleStartTime }}s</p>
+          <mat-slider [max]="lightSettingsSvc.CYCLE_MAX" [min]="lightSettingsSvc.CYCLE_MIN" discrete>
+            <input matSliderThumb formControlName="semaphore2CycleStartTime">
+          </mat-slider>
+        </div>
+      </div>
+
+      <div class="row">
+        <h5>Semáforo 3</h5>
+      </div>
+
+
+      <div class="row">
+        <div class="col-4">
+          <p>Duração do vermelho: {{ lightSettingsSvc.runSettings.getRawValue().semaphore3RedDuration }}s</p>
+          <mat-slider [max]="lightSettingsSvc.RED_MAX" [min]="lightSettingsSvc.RED_MIN" discrete>
+            <input matSliderThumb formControlName="semaphore3RedDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Duração do verde: {{ lightSettingsSvc.runSettings.getRawValue().semaphore3GreenDuration }}s </p>
+          <mat-slider [max]="lightSettingsSvc.GREEN_MAX" [min]="lightSettingsSvc.GREEN_MIN" discrete>
+            <input matSliderThumb formControlName="semaphore3GreenDuration">
+          </mat-slider>
+        </div>
+        <div class="col-4">
+          <p>Offset de início do ciclo: {{ lightSettingsSvc.runSettings.getRawValue().semaphore3CycleStartTime }}s</p>
+          <mat-slider [max]="lightSettingsSvc.CYCLE_MAX" [min]="lightSettingsSvc.CYCLE_MIN" discrete>
+            <input matSliderThumb formControlName="semaphore3CycleStartTime">
+          </mat-slider>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+<div mat-dialog-actions class="d-flex justify-content-between px-4">
+  <button (click)="lightSettingsSvc.setStartingParams()" mat-flat-button color="primary" mat-dialog-close>Fechar</button>
+  <button (click)="lightSettingsSvc.randomizeLightsParameters()" mat-flat-button color="primary">Randomizar</button>
+</div>
