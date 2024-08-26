@@ -20,7 +20,6 @@ function updateAutomatedSimulation() {
   if (time < getSimulatedTime()) return;
 	const simulatedTime = time;
   myRestartFunction();
-  console.log(simulationConfig);
   sendDataToAngular(
 		{
 			avgTime: getAvgCarTimes(),

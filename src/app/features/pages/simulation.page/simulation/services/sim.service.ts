@@ -1,4 +1,5 @@
 import { inject, Injectable } from "@angular/core";
+import { GenerationResult } from "src/app/features/pages/simulation.page/simulation/services/models";
 import { SimCommsService } from "src/app/features/pages/simulation.page/simulation/services/sim-comms.service";
 import { SimConfigControlService } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
 import { SnackbarService } from "src/app/features/services/snackbar.service";
@@ -15,13 +16,13 @@ export class SimService {
 
 	simulationIsDone = false;
 
-	handleSimulationStart() {
+	/** Stops the simulation from running when opening the page */
+	handleSimIframeInitialState() {
 		setTimeout(() => this.simCommsSvc.restartSim(), 100);
 
 		if (!this.simConfSvc.isAutomatedSimulation) return;
-		this.postAutomatedSimulation();
 	}
-	
+
 	private postAutomatedSimulation() {
 		this.simCommsSvc.postMessage({
 			type: "function",
@@ -29,40 +30,33 @@ export class SimService {
 			functionName: "automatedSimulation",
 		});
 	}
-	
-	nextIteration(data: {
-		avgTime: number;
-		carsTotal: number;
-		avgSpeed: number;
-		iterateNext: boolean;
-		occupationRate: number;
-	}) {
+
+	nextIteration(data: GenerationResult) {
 		console.table(data);
-		// Send data to backend, check if iteration should end prematurely
 		const post = () => {
 			this.simCommsSvc.postMessage({
 				type: "function",
 				data: this.simConfSvc.simConfig,
 				functionName: "nextIteration",
 			});
-			this.simConfSvc.currentIteration++;
+			this.simConfSvc.currentPopulation++;
 		};
 		const endSimulationFrameSide = () => {
 			this.simCommsSvc.postMessage({
 				type: "function",
 				data: undefined,
-				functionName: "endGeneration"
-			})
-		}
-		
+				functionName: "endGeneration",
+			});
+		};
+		this.simConfSvc.addResult(data);
 		if (data.iterateNext === false) {
 			this.snackbar.showNotification(
-				"Simulação terminou, processando dados ...",
+				"Geração terminou, processando dados para gerar próxima geração",
 				"success"
 			);
+			// asks backend for next generation
 			this.simulationIsDone = true;
-			this.simConfSvc.isAutomatedSimulation = false;
-			this.simConfSvc.currentIteration = 0;
+			this.simConfSvc.currentPopulation = 1;
 			endSimulationFrameSide();
 			return;
 		}
@@ -74,12 +68,13 @@ export class SimService {
 	}
 
 	startSimulation() {
+		// ask backend to create simulation
 		console.log(this.simConfSvc.simConfig);
-		this.simConfSvc.currentIteration = 1;
+		this.simConfSvc.currentPopulation = 1;
+		this.simConfSvc.currentGeneration = 1;
 		this.simConfSvc.isAutomatedSimulation = true;
 		this.simCommsSvc.restartSim();
 		this.postAutomatedSimulation();
-		this.simCommsSvc.startSim();
 	}
 }
 

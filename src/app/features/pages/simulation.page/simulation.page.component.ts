@@ -95,7 +95,7 @@ export class MultipleSimulationsPageComponent
 
 	initRunConfig() {
 		this.simConfigService.updateSliders();
-		this.simService.handleSimulationStart();
+		this.simService.handleSimIframeInitialState();
 	}
 
 	states = {
@@ -145,7 +145,7 @@ export class MultipleSimulationsPageComponent
 	openOptimizationDialog() {
 		this.dialog.open(
 			OptimizationDialogComponent, 
-			this.DEFAULT_MODAL_CONFIG);
+			{height: 'auto', width: 'auto'});
 	}
 
 	openLightsSettings() {

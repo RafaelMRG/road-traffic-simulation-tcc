@@ -8,8 +8,10 @@
           <mat-form-field>
             <mat-label>N° de iterações</mat-label>
             <input matInput type="number" formControlName="population">
-            @if (optimizationSettingsSvc.runSettings.controls.population.value !== 4) {
-            <button matSuffix mat-icon-button aria-label="Limpar" (click)="optimizationSettingsSvc.runSettings.controls.population.setValue(4)">
+            @if (optimizationSettingsSvc.runSettings.controls.population.value !==
+            optimizationSettingsSvc.LIMITS.population.default) {
+            <button matSuffix mat-icon-button aria-label="Limpar"
+              (click)="optimizationSettingsSvc.runSettings.controls.population.setValue(optimizationSettingsSvc.LIMITS.population.default)">
               <mat-icon>close</mat-icon>
             </button>
             }
@@ -20,9 +22,10 @@
           <mat-form-field>
             <mat-label>Tempo simulado</mat-label>
             <input #simulatedTime matInput type="number" formControlName="simulatedTime">
-            @if (optimizationSettingsSvc.runSettings.controls.simulatedTime.value !== 120) {
+            @if (optimizationSettingsSvc.runSettings.controls.simulatedTime.value !==
+            optimizationSettingsSvc.LIMITS.simulatedTime.default) {
             <button matSuffix mat-icon-button aria-label="Limpar"
-              (click)="optimizationSettingsSvc.runSettings.controls.simulatedTime.setValue(120)">
+              (click)="optimizationSettingsSvc.runSettings.controls.simulatedTime.setValue(optimizationSettingsSvc.LIMITS.simulatedTime.default)">
               <mat-icon>close</mat-icon>
             </button>
             }
@@ -30,13 +33,51 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-label>Taxa de mutação</mat-label>
+            <input matInput type="number" formControlName="mutationRate" step="0.1"
+              [max]="optimizationSettingsSvc.LIMITS.mutationRate.max"
+              [min]="optimizationSettingsSvc.LIMITS.mutationRate.min">
+            @if (optimizationSettingsSvc.runSettings.controls.mutationRate.value !==
+            optimizationSettingsSvc.LIMITS.mutationRate.default) {
+            <button matSuffix mat-icon-button aria-label="Limpar"
+              (click)="optimizationSettingsSvc.runSettings.controls.mutationRate.setValue(optimizationSettingsSvc.LIMITS.mutationRate.default)">
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-label>Seleção de crossover</mat-label>
+            <input matInput type="number" formControlName="selecteds"
+              [max]="optimizationSettingsSvc.LIMITS.selecteds.max" [min]="optimizationSettingsSvc.LIMITS.selecteds.min">
+            @if (optimizationSettingsSvc.runSettings.controls.selecteds.value !==
+            optimizationSettingsSvc.LIMITS.selecteds.default) {
+            <button matSuffix mat-icon-button aria-label="Limpar"
+              (click)="optimizationSettingsSvc.runSettings.controls.selecteds.setValue(optimizationSettingsSvc.LIMITS.selecteds.default)">
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+          </mat-form-field>
+        </div>
+
+      </div>
+
     </form>
   </div>
 
-    
+
 </div>
 
 <div mat-dialog-actions class="d-flex justify-content-between px-4">
   <button mat-flat-button color="warn" mat-dialog-close>Fechar</button>
-  <button (click)="optimizationSettingsSvc.startSimulation()" mat-raised-button color="primary" mat-dialog-close>Iniciar simulação</button>
+  <button (click)="optimizationSettingsSvc.startSimulation()" mat-raised-button color="primary" mat-dialog-close>Iniciar
+    simulação</button>
 </div>

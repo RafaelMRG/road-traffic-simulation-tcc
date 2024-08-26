@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { GenerationResult, GenerationResults, SimConfiguration } from 'src/app/features/pages/simulation.page/simulation/services/models';
 import { SimCommsService } from 'src/app/features/pages/simulation.page/simulation/services/sim-comms.service';
 
 @Injectable({
@@ -8,19 +9,30 @@ import { SimCommsService } from 'src/app/features/pages/simulation.page/simulati
 export class SimConfigControlService {
 	constructor() {}
 
-  private simCommsSvc = inject(SimCommsService);
+	private simCommsSvc = inject(SimCommsService);
 
-	
 	/**
 	 * 1-index based
 	 *
 	 * @type {number}
 	 */
-	currentIteration = 1;
+	currentPopulation = 1;
+	currentGeneration = 1;
+	simulationId?: number;
 	isAutomatedSimulation = false;
+	results: GenerationResults = [];
+
+	addResult(result: GenerationResult){
+		this.results.push(
+			{
+				...result,
+				lights: this.simConfig.lightsConfig
+			}
+		)
+	}
 
 	simConfig: SimConfiguration = {
-		population: 2,
+		population: 6,
 		simulatedTime: 60,
 		mutationRate: 0.3,
 		selecteds: 2,
@@ -31,16 +43,16 @@ export class SimConfigControlService {
 		],
 		slidersPatch: {
 			trafficControl: {
-				mainInflow: 2000,
-				secondaryInflow: 800,
+				mainInflow: 4000,
+				secondaryInflow: 0,
 				percentRight: 15,
 				percentLeft: 0,
 				timelapse: 10,
 			},
 			carFollowingControl: {
 				maxSpeed: 60,
-				timeGap: 1.5,
-				maxAccel: 1.5,
+				timeGap: 0.3,
+				maxAccel: 2,
 			},
 		},
 	};
@@ -50,14 +62,15 @@ export class SimConfigControlService {
 			this.trafficControl.getRawValue(),
 			this.carFollowingControl.getRawValue(),
 		];
-		this.simCommsSvc.postMessage({ type: "function", data, functionName: "setSliders" });
+		this.simCommsSvc.postMessage({
+			type: "function",
+			data,
+			functionName: "setSliders",
+		});
 	}
 
-
 	// <Controle de inputs>
-	trafficControl = new FormGroup(
-		this.getPredefinedSlidersFg().trafficControl
-	);
+	trafficControl = new FormGroup(this.getPredefinedSlidersFg().trafficControl);
 
 	carFollowingControl = new FormGroup(
 		this.getPredefinedSlidersFg().carFollowingControl
@@ -83,43 +96,3 @@ export class SimConfigControlService {
 	}
 	// </Controle de inputs>
 }
-
-
-
-export type SimConfiguration = {
-	simulatedTime: number; // int
-	population: number; // int
-	mutationRate: number; // float 
-	selecteds: number; // int
-	slidersPatch: {
-		trafficControl: {
-			mainInflow: number;
-			secondaryInflow: number;
-			percentRight: number;
-			percentLeft: number;
-			timelapse: number;
-		};
-		carFollowingControl: {
-			maxSpeed: number;
-			timeGap: number;
-			maxAccel: number;
-		};
-	};
-	lightsConfig: LightPhasing[];
-};
-
-/**
- * Configuração dos tempos do semáforo de um cruzamento
- *
- * @export
- */
-export type LightPhasing = {
-	redDuration: number;
-	greenDuration: number;
-	/**
-	 * Offset de início do cíclo do semáforo, utilizado para formar as waves de verde
-	 *
-	 * @type {number}
-	 */
-	cycleStartTime: number;
-};
