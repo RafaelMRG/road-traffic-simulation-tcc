@@ -41,7 +41,7 @@
           <div class="d-flex align-items-center flex-column gap-3">
             <strong class="text-center" style="max-width: 14rem; display: block;">Modo de auto controle está ligado, botões desativados</strong>
             @if (!simService.simulationIsDone){
-              <button mat-raised-button color="warn">Forçar parada (WIP)</button>
+              <button mat-raised-button color="warn" (click)="simService.stopAutomatedSimulation()">Forçar parada</button>
               <button mat-flat-button color="primary" class="w-100">Iteração: {{simConfigService.currentPopulation}} de {{ simConfigService.simConfig.population }}</button>
             } @else {
               <button mat-flat-button color="primary"><mat-icon class="text-warning fw-bolder">done</mat-icon> Simulação terminou</button>

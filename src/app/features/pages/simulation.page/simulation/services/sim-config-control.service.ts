@@ -31,6 +31,10 @@ export class SimConfigControlService {
 		)
 	}
 
+	resetConfig(){
+		this.isAutomatedSimulation = false;
+	}
+
 	simConfig: SimConfiguration = {
 		population: 6,
 		simulatedTime: 60,

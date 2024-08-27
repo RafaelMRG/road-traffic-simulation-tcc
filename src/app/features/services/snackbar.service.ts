@@ -31,7 +31,7 @@ export class SnackbarService {
       duration: 5000,
       panelClass: [panelClass],
       horizontalPosition: 'center',
-      verticalPosition: 'top'
+      verticalPosition: 'bottom'
     });
   }
 }

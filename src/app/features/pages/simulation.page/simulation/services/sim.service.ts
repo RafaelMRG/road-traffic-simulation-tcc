@@ -41,13 +41,6 @@ export class SimService {
 			});
 			this.simConfSvc.currentPopulation++;
 		};
-		const endSimulationFrameSide = () => {
-			this.simCommsSvc.postMessage({
-				type: "function",
-				data: undefined,
-				functionName: "endGeneration",
-			});
-		};
 		this.simConfSvc.addResult(data);
 		if (data.iterateNext === false) {
 			this.snackbar.showNotification(
@@ -57,7 +50,7 @@ export class SimService {
 			// asks backend for next generation
 			this.simulationIsDone = true;
 			this.simConfSvc.currentPopulation = 1;
-			endSimulationFrameSide();
+			this.endSimulationFrameSide();
 			return;
 		}
 		this.snackbar.showNotification(
@@ -75,6 +68,21 @@ export class SimService {
 		this.simConfSvc.isAutomatedSimulation = true;
 		this.simCommsSvc.restartSim();
 		this.postAutomatedSimulation();
+	}
+
+	endSimulationFrameSide() {
+		this.simCommsSvc.postMessage({
+			type: "function",
+			data: undefined,
+			functionName: "endGeneration",
+		});
+	};
+	
+	stopAutomatedSimulation(){
+		this.endSimulationFrameSide();
+		this.simCommsSvc.stopSim();
+		this.simConfSvc.resetConfig();
+		this.snackbar.showNotification('Simulação prematuramente terminada', 'info');
 	}
 }
 
