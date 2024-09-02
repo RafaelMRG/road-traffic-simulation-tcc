@@ -16,7 +16,6 @@ function startAutomatedSimulation(data /* :SimConfiguration */) {
 }
 
 function updateAutomatedSimulation() {
-	console.log(simulationConfig)
   if (time < getSimulatedTime()) return;
 	const simulatedTime = time;
   myRestartFunction();

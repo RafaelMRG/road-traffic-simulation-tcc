@@ -32,7 +32,7 @@ export type GenerationResult = {
 	simulatedTime: number;
 	avgSpeed: number;
 	occupationRate: number;
-  lights: LightPhasing[];
+  	lights: LightPhasing[];
 	iterateNext: boolean;
 };
 

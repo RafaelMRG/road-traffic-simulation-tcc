@@ -1,18 +1,23 @@
 import { inject, Injectable } from "@angular/core";
 import { GenerationResult } from "src/app/features/pages/simulation.page/simulation/services/models";
 import { SimCommsService } from "src/app/features/pages/simulation.page/simulation/services/sim-comms.service";
-import { SimConfigControlService } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
+import {
+	SimConfigControlService
+} from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
 import { SnackbarService } from "src/app/features/services/snackbar.service";
+import { ApiRequestsService } from "./api/api-requests.service";
 
 @Injectable({
-	providedIn: "root",
+	providedIn: "root"
 })
 export class SimService {
-	constructor() {}
+	constructor() {
+	}
 
 	private simCommsSvc = inject(SimCommsService);
 	private simConfSvc = inject(SimConfigControlService);
 	private snackbar = inject(SnackbarService);
+	private api = inject(ApiRequestsService);
 
 	simulationIsDone = false;
 
@@ -27,7 +32,7 @@ export class SimService {
 		this.simCommsSvc.postMessage({
 			type: "function",
 			data: this.simConfSvc.simConfig,
-			functionName: "automatedSimulation",
+			functionName: "automatedSimulation"
 		});
 	}
 
@@ -37,7 +42,7 @@ export class SimService {
 			this.simCommsSvc.postMessage({
 				type: "function",
 				data: this.simConfSvc.simConfig,
-				functionName: "nextIteration",
+				functionName: "nextIteration"
 			});
 			this.simConfSvc.currentPopulation++;
 		};
@@ -49,6 +54,8 @@ export class SimService {
 			);
 			// asks backend for next generation
 			this.simulationIsDone = true;
+			this.simConfSvc.isAutomatedSimulation = false; // Desabilita modo de automação
+																		  // TODO: Será adicionado um check novo quando integrar com o backend
 			this.simConfSvc.currentPopulation = 1;
 			this.endSimulationFrameSide();
 			return;
@@ -60,7 +67,11 @@ export class SimService {
 		setTimeout(post, 5000);
 	}
 
-	startSimulation() {
+	async startSimulation() {
+		this.simConfSvc.simulationId =
+			await this.api.createSimulation(this.simConfSvc.simConfig)
+			.then(res => res.id);
+		console.log('creating simulation in server')
 		// ask backend to create simulation
 		console.log(this.simConfSvc.simConfig);
 		this.simConfSvc.currentPopulation = 1;
@@ -74,15 +85,15 @@ export class SimService {
 		this.simCommsSvc.postMessage({
 			type: "function",
 			data: undefined,
-			functionName: "endGeneration",
+			functionName: "endGeneration"
 		});
 	};
-	
-	stopAutomatedSimulation(){
+
+	stopAutomatedSimulation() {
 		this.endSimulationFrameSide();
 		this.simCommsSvc.stopSim();
 		this.simConfSvc.resetConfig();
-		this.snackbar.showNotification('Simulação prematuramente terminada', 'info');
+		this.snackbar.showNotification("Simulação prematuramente terminada", "info");
 	}
 }
 
