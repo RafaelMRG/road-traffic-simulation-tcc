@@ -1,13 +1,19 @@
-import { inject, Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GenerationResult, GenerationResults, SimConfiguration } from 'src/app/features/pages/simulation.page/simulation/services/models';
-import { SimCommsService } from 'src/app/features/pages/simulation.page/simulation/services/sim-comms.service';
+import { inject, Injectable } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import {
+	GenerationLights,
+	GenerationResult,
+	GenerationResults,
+	SimConfiguration
+} from "src/app/features/pages/simulation.page/simulation/services/models";
+import { SimCommsService } from "src/app/features/pages/simulation.page/simulation/services/sim-comms.service";
 
 @Injectable({
-	providedIn: "root",
+	providedIn: "root"
 })
 export class SimConfigControlService {
-	constructor() {}
+	constructor() {
+	}
 
 	private simCommsSvc = inject(SimCommsService);
 
@@ -21,17 +27,18 @@ export class SimConfigControlService {
 	simulationId?: number;
 	isAutomatedSimulation = false;
 	results: GenerationResults = [];
+	optimizationLightCfg: GenerationLights = [];
 
-	addResult(result: GenerationResult){
+	addResult(result: GenerationResult) {
 		this.results.push(
 			{
 				...result,
 				lights: this.simConfig.lightsConfig
 			}
-		)
+		);
 	}
 
-	resetConfig(){
+	resetConfig() {
 		this.isAutomatedSimulation = false;
 	}
 
@@ -43,7 +50,7 @@ export class SimConfigControlService {
 		lightsConfig: [
 			{ cycleStartTime: 0, greenDuration: 30, redDuration: 30 },
 			{ cycleStartTime: 15, greenDuration: 30, redDuration: 30 },
-			{ cycleStartTime: 30, greenDuration: 30, redDuration: 30 },
+			{ cycleStartTime: 30, greenDuration: 30, redDuration: 30 }
 		],
 		slidersPatch: {
 			trafficControl: {
@@ -51,25 +58,25 @@ export class SimConfigControlService {
 				secondaryInflow: 0,
 				percentRight: 15,
 				percentLeft: 0,
-				timelapse: 10,
+				timelapse: 10
 			},
 			carFollowingControl: {
 				maxSpeed: 60,
 				timeGap: 0.3,
-				maxAccel: 2,
-			},
-		},
+				maxAccel: 2
+			}
+		}
 	};
 
 	updateSliders() {
 		const data = [
 			this.trafficControl.getRawValue(),
-			this.carFollowingControl.getRawValue(),
+			this.carFollowingControl.getRawValue()
 		];
 		this.simCommsSvc.postMessage({
 			type: "function",
 			data,
-			functionName: "setSliders",
+			functionName: "setSliders"
 		});
 	}
 
@@ -89,14 +96,15 @@ export class SimConfigControlService {
 				secondaryInflow: new FormControl<number>(tc.secondaryInflow),
 				percentRight: new FormControl<number>(tc.percentRight),
 				percentLeft: new FormControl<number>(tc.percentLeft),
-				timelapse: new FormControl<number>(tc.timelapse),
+				timelapse: new FormControl<number>(tc.timelapse)
 			},
 			carFollowingControl: {
 				maxSpeed: new FormControl<number>(cf.maxSpeed),
 				timeGap: new FormControl<number>(cf.timeGap),
-				maxAccel: new FormControl<number>(cf.maxAccel),
-			},
+				maxAccel: new FormControl<number>(cf.maxAccel)
+			}
 		};
 	}
+
 	// </Controle de inputs>
 }

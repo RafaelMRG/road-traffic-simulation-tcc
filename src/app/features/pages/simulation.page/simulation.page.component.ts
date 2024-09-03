@@ -6,7 +6,7 @@ import {
 	inject,
 	OnDestroy,
 	OnInit,
-	ViewChild,
+	ViewChild
 } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -16,10 +16,16 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSliderModule } from "@angular/material/slider";
 import { Subscription } from "rxjs";
-import { LightsSettingsDialogComponent } from "src/app/features/pages/simulation.page/simulation/components/lights-settings-dialog/lights-settings-dialog.component";
-import { OptimizationDialogComponent } from "src/app/features/pages/simulation.page/simulation/components/optimization-dialog/optimization-dialog.component";
+import {
+	LightsSettingsDialogComponent
+} from "src/app/features/pages/simulation.page/simulation/components/lights-settings-dialog/lights-settings-dialog.component";
+import {
+	OptimizationDialogComponent
+} from "src/app/features/pages/simulation.page/simulation/components/optimization-dialog/optimization-dialog.component";
 import { SimCommsService } from "src/app/features/pages/simulation.page/simulation/services/sim-comms.service";
-import { SimConfigControlService } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
+import {
+	SimConfigControlService
+} from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
 import { SimService } from "src/app/features/pages/simulation.page/simulation/services/sim.service";
 
 @Component({
@@ -33,14 +39,12 @@ import { SimService } from "src/app/features/pages/simulation.page/simulation/se
 		ReactiveFormsModule,
 		JsonPipe,
 		MatDividerModule,
-		MatDialogModule,
+		MatDialogModule
 	],
 	templateUrl: "./simulation.page.component.html",
-	styleUrl: "./simulation.page.component.scss",
+	styleUrl: "./simulation.page.component.scss"
 })
-export class MultipleSimulationsPageComponent
-	implements OnInit, OnDestroy, AfterViewInit
-{
+export class SimulationsPageComponent implements OnInit, OnDestroy, AfterViewInit {
 	constructor() {
 		this.carFollowingChanges =
 			this.simConfigService.carFollowingControl.valueChanges.subscribe(() =>
@@ -63,7 +67,7 @@ export class MultipleSimulationsPageComponent
 		speed: "km/h",
 		accel: "m/s²",
 		percentage: "%",
-		time: "s",
+		time: "s"
 	};
 
 	@ViewChild("legacyFrame", { static: false }) iframe!: ElementRef;
@@ -99,7 +103,7 @@ export class MultipleSimulationsPageComponent
 	}
 
 	states = {
-		isStopped: false,
+		isStopped: false
 	};
 
 	receiveMessage(event: MessageEvent): void {
@@ -132,20 +136,20 @@ export class MultipleSimulationsPageComponent
 		if (message.type === "state") {
 			this.states = {
 				...this.states,
-				...message.data,
+				...message.data
 			};
 		}
 	}
 
 	private readonly DEFAULT_MODAL_CONFIG = {
 		width: "80vw",
-		height: "80vh",
+		height: "80vh"
 	};
 
 	openOptimizationDialog() {
 		this.dialog.open(
-			OptimizationDialogComponent, 
-			{height: 'auto', width: 'auto'});
+			OptimizationDialogComponent,
+			{ height: "auto", width: "auto" });
 	}
 
 	openLightsSettings() {

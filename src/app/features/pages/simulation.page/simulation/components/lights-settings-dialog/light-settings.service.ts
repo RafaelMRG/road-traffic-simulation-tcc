@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SimConfigControlService } from 'src/app/features/pages/simulation.page/simulation/services/sim-config-control.service';
+import { LightPhasing } from "../../services/models";
 
 @Injectable({
 	providedIn: "root",
@@ -65,6 +66,40 @@ export class LightSettingsService {
 		});
 	}
 
+	setOptimizationLights(){
+		this.simConfSvc.optimizationLightCfg = this.buildInitialPopulation();
+	}
+
+	private buildInitialPopulation() {
+		let initialConfig: LightPhasing[][] = []
+		for (let i = 0; i < this.simConfSvc.simConfig.population; i++){
+			let currentCitizen: LightPhasing[] = []
+			for(let j = 0; j < 3; j++) {
+				currentCitizen.push(this.getRandomizedLights());
+			}
+			initialConfig.push(currentCitizen);
+		}
+		console.log(initialConfig)
+		return initialConfig;
+	}
+
+	private getRandomizedLights(): LightPhasing {
+		return {
+				cycleStartTime: this.getRandomInteger(
+					this.CYCLE_MIN,
+					this.CYCLE_MAX
+				),
+				greenDuration: this.getRandomInteger(
+					this.GREEN_MIN,
+					this.GREEN_MAX
+				),
+				redDuration: this.getRandomInteger(
+					this.RED_MIN,
+					this.RED_MAX
+				),
+			}
+	}
+
 	setStartingParams() {
 		const sem1 = this.simConfSvc.simConfig.lightsConfig[0];
 		const sem2 = this.simConfSvc.simConfig.lightsConfig[1];
@@ -83,10 +118,10 @@ export class LightSettingsService {
 		sem3.greenDuration = data.semaphore3GreenDuration ?? 30;
 	}
 
-	public readonly RED_MIN = 0;
-	public readonly RED_MAX = 120;
-	public readonly GREEN_MIN = 0;
-	public readonly GREEN_MAX = 120;
+	public readonly RED_MIN = 30;
+	public readonly RED_MAX = 90;
+	public readonly GREEN_MIN = 30;
+	public readonly GREEN_MAX = 90;
 	public readonly CYCLE_MAX = 300;
 	public readonly CYCLE_MIN = 0;
 

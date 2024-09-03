@@ -20,6 +20,8 @@ export type SimConfiguration = {
 	lightsConfig: LightPhasing[];
 };
 
+export type GenerationLights = LightPhasing[][];
+
 export type LightPhasing = {
 	redDuration: number;
 	greenDuration: number;

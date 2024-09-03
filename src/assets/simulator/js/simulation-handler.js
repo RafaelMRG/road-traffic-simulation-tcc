@@ -30,7 +30,6 @@ function updateAutomatedSimulation() {
 			get occupationRate() {
 				return (this.carsTotal * 0.5 / this.simulatedTime * 60 * 60 ) / 4200 // taxa de fluxo de parte simétrica / fluxo de saturação teórico
 			},
-			iterateNext: currentIteration + 1 < simulationConfig.population,
 		},
 		"function",
 		"nextIteration"

@@ -1,11 +1,12 @@
 import { inject, Injectable } from "@angular/core";
-import { GenerationResult } from "src/app/features/pages/simulation.page/simulation/services/models";
+import { GenerationResult, LightPhasing } from "src/app/features/pages/simulation.page/simulation/services/models";
 import { SimCommsService } from "src/app/features/pages/simulation.page/simulation/services/sim-comms.service";
 import {
 	SimConfigControlService
 } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
 import { SnackbarService } from "src/app/features/services/snackbar.service";
 import { ApiRequestsService } from "./api/api-requests.service";
+import { LightSettingsService } from "../components/lights-settings-dialog/light-settings.service";
 
 @Injectable({
 	providedIn: "root"
@@ -18,6 +19,7 @@ export class SimService {
 	private simConfSvc = inject(SimConfigControlService);
 	private snackbar = inject(SnackbarService);
 	private api = inject(ApiRequestsService);
+	private lightSvc = inject(LightSettingsService);
 
 	simulationIsDone = false;
 
@@ -36,28 +38,41 @@ export class SimService {
 		});
 	}
 
-	nextIteration(data: GenerationResult) {
+	async nextIteration(data: GenerationResult) {
 		console.table(data);
 		const post = () => {
+			const currPop = ++this.simConfSvc.currentPopulation;
+			this.simConfSvc.simConfig.lightsConfig = this.simConfSvc.optimizationLightCfg[currPop - 1];
 			this.simCommsSvc.postMessage({
 				type: "function",
 				data: this.simConfSvc.simConfig,
 				functionName: "nextIteration"
 			});
-			this.simConfSvc.currentPopulation++;
 		};
 		this.simConfSvc.addResult(data);
-		if (data.iterateNext === false) {
+		if (this.simConfSvc.currentPopulation >= this.simConfSvc.simConfig.population) {
 			this.snackbar.showNotification(
 				"Geração terminou, processando dados para gerar próxima geração",
 				"success"
 			);
 			// asks backend for next generation
-			this.simulationIsDone = true;
-			this.simConfSvc.isAutomatedSimulation = false; // Desabilita modo de automação
-																		  // TODO: Será adicionado um check novo quando integrar com o backend
+			const backEndResult: LightPhasing[][] | null = null;
+
 			this.simConfSvc.currentPopulation = 1;
-			this.endSimulationFrameSide();
+			if (backEndResult === null) {
+				this.simConfSvc.isAutomatedSimulation = false; // Desabilita modo de automação
+				this.simulationIsDone = true;
+				this.simConfSvc.currentGeneration = 1;
+				this.endSimulationFrameSide();
+			} else {
+				this.simConfSvc.currentGeneration++;
+				// Replace light configuration for generation
+				this.snackbar.showNotification(
+					"Iniciando próxima geração em 5 segundos",
+					"info"
+				);
+				await this.startSimulation(true);
+			}
 			return;
 		}
 		this.snackbar.showNotification(
@@ -67,15 +82,19 @@ export class SimService {
 		setTimeout(post, 5000);
 	}
 
-	async startSimulation() {
-		this.simConfSvc.simulationId =
-			await this.api.createSimulation(this.simConfSvc.simConfig)
-			.then(res => res.id);
+	async startSimulation(skipGenerationReset?: boolean) {
+		// this.simConfSvc.simulationId =
+		// 	await this.api.createSimulation(this.simConfSvc.simConfig)
+		// 	.then(res => res.id);
 		console.log('creating simulation in server')
 		// ask backend to create simulation
 		console.log(this.simConfSvc.simConfig);
+		this.lightSvc.setOptimizationLights();
 		this.simConfSvc.currentPopulation = 1;
-		this.simConfSvc.currentGeneration = 1;
+		if (!skipGenerationReset){
+			this.simConfSvc.currentGeneration = 1;
+		}
+		this.simConfSvc.simConfig.lightsConfig = this.simConfSvc.optimizationLightCfg[0];
 		this.simConfSvc.isAutomatedSimulation = true;
 		this.simCommsSvc.restartSim();
 		this.postAutomatedSimulation();
