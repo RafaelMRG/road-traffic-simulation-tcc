@@ -47,6 +47,9 @@ export class SimConfigControlService {
 		simulatedTime: 60,
 		mutationRate: 0.3,
 		selecteds: 2,
+		maxGenerations: 0,
+		minGenerations: 0,
+		avgTimeDelta: 0,
 		lightsConfig: [
 			{ cycleStartTime: 0, greenDuration: 30, redDuration: 30 },
 			{ cycleStartTime: 15, greenDuration: 30, redDuration: 30 },

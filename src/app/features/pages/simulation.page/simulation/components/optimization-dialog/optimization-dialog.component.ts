@@ -1,5 +1,5 @@
-import { Component, inject } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { Component, inject, OnInit } from "@angular/core";
+import { AbstractControl, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
@@ -21,6 +21,24 @@ import { OptimizationSettingsService } from "src/app/features/pages/simulation.p
 	templateUrl: "./optimization-dialog.component.html",
 	styleUrl: "./optimization-dialog.component.scss",
 })
-export class OptimizationDialogComponent {
+export class OptimizationDialogComponent implements OnInit {
 	protected optimizationSettingsSvc = inject(OptimizationSettingsService);
+
+	ngOnInit() {
+		this.optimizationSettingsSvc.optimizationStopCriteria.get('maxGenerations')?.setValidators([this.validateRange.bind(this)]);
+		this.optimizationSettingsSvc.optimizationStopCriteria.get('minGenerations')?.setValidators([this.validateRange.bind(this)]);
+	}
+
+	validateRange(control: AbstractControl): { [key: string]: boolean } | null {
+		const min = this.optimizationSettingsSvc.optimizationStopCriteria.get('minGenerations')?.value ?? 0;
+		const max = this.optimizationSettingsSvc.optimizationStopCriteria.get('maxGenerations')?.value ?? 0;
+		console.log(min, max)
+
+		if (max < min) {
+			return { invalidRange: true };
+		}
+
+		return null;
+	}
+
 }

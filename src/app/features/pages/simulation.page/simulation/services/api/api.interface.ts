@@ -5,7 +5,7 @@ import {
 
 export interface ApiRequests {
 	createSimulation: (simulationParams: Partial<SimConfiguration>) => Promise<{ id: number }>;
-	processGenerationResults: (id: number, results: GenerationResults) => Promise<GenerationInstruction>;
+	processGenerationResults: (id: number, results: GenerationResults) => Promise<GenerationInstruction[]>;
 	isSimulationDone: (id: number) => Promise<[true | false]>;
 	endSimulation: (id: number) => Promise<void>;
 

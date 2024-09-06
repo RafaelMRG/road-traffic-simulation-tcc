@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { GenerationResults, SimConfiguration } from "src/app/features/pages/simulation.page/simulation/services/models";
 import { SimConfigControlService } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
 import { SimService } from "src/app/features/pages/simulation.page/simulation/services/sim.service";
+import { LightSettingsService } from "../lights-settings-dialog/light-settings.service";
 
 @Injectable({
 	providedIn: "root",
@@ -13,6 +14,7 @@ export class OptimizationSettingsService {
 	}
 
 	private simConfSvc = inject(SimConfigControlService);
+	private lightSvc = inject(LightSettingsService);
 	private simSvc = inject(SimService);
 
 	public readonly LIMITS = {
@@ -60,16 +62,25 @@ export class OptimizationSettingsService {
 		]),
 	});
 
+	public optimizationStopCriteria = new FormGroup({
+		minGenerations: new FormControl<number>(0),
+		maxGenerations: new FormControl<number>(0),
+		avgTimeDelta: new FormControl<number>(0),
+	})
+
 	startSimulation() {
+		this.lightSvc.setOptimizationLights();
 		this.setStartingParams();
 		this.simSvc.startSimulation();
 	}
 
 	private setStartingParams() {
 		const data = this.runSettings.getRawValue();
+		const data2 = this.optimizationStopCriteria.getRawValue();
 		this.simConfSvc.simConfig = {
 			...this.simConfSvc.simConfig,
 			...data,
+			...data2,
 		} as SimConfiguration;
 	}
 

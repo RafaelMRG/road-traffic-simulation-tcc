@@ -55,6 +55,9 @@ export class SimService {
 				"Geração terminou, processando dados para gerar próxima geração",
 				"success"
 			);
+			if (this.simConfSvc.simulationId === undefined) throw new Error('ID de simulação é indefinido')
+			await this.api.processGenerationResults(this.simConfSvc.simulationId, this.simConfSvc.results)
+				.then((result) => this.simConfSvc.optimizationLightCfg = result);
 			// asks backend for next generation
 			const backEndResult: LightPhasing[][] | null = null;
 
@@ -83,12 +86,10 @@ export class SimService {
 	}
 
 	async startSimulation(skipGenerationReset?: boolean) {
-		// this.simConfSvc.simulationId =
-		// 	await this.api.createSimulation(this.simConfSvc.simConfig)
-		// 	.then(res => res.id);
-		console.log('creating simulation in server')
+		this.simConfSvc.simulationId =
+			await this.api.createSimulation(this.simConfSvc.simConfig)
+			.then(res => res.id);
 		// ask backend to create simulation
-		console.log(this.simConfSvc.simConfig);
 		this.lightSvc.setOptimizationLights();
 		this.simConfSvc.currentPopulation = 1;
 		if (!skipGenerationReset){

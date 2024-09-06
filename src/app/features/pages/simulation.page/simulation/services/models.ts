@@ -3,6 +3,9 @@ export type SimConfiguration = {
 	population: number; // int
 	mutationRate: number; // float
 	selecteds: number; // int
+	minGenerations: number; // int
+	maxGenerations: number; // int
+	avgTimeDelta: number; // float
 	slidersPatch: {
 		trafficControl: {
 			mainInflow: number;
@@ -18,6 +21,7 @@ export type SimConfiguration = {
 		};
 	};
 	lightsConfig: LightPhasing[];
+	lights?: LightPhasing[][];
 };
 
 export type GenerationLights = LightPhasing[][];

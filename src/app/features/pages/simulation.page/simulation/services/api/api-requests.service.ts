@@ -45,9 +45,9 @@ export class ApiRequestsService implements ApiRequests {
     )
   }
 
-  processGenerationResults(id: number, results: GenerationResults): Promise<GenerationInstruction> {
+  processGenerationResults(id: number, results: GenerationResults): Promise<GenerationInstruction[]> {
     return firstValueFrom(
-       this.http.post<GenerationInstruction>(this.BASE_URL + `/simulation/process-generation/${id}`, results)
+       this.http.post<GenerationInstruction[]>(this.BASE_URL + `/simulation/process-results/${id}`, results)
     )
   }
 }

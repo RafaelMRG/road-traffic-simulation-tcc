@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SimulationsPageComponent } from "./simulation.page.component";
 
-import { MultipleSimulationsPageComponent } from './multiple-simulations.page.component';
 
-describe('MultipleSimulationsPageComponent', () => {
-  let component: MultipleSimulationsPageComponent;
-  let fixture: ComponentFixture<MultipleSimulationsPageComponent>;
+describe('SimulationsPageComponent', () => {
+  let component: SimulationsPageComponent;
+  let fixture: ComponentFixture<SimulationsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MultipleSimulationsPageComponent]
+      imports: [SimulationsPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MultipleSimulationsPageComponent);
+    fixture = TestBed.createComponent(SimulationsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
