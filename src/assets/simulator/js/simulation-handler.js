@@ -25,7 +25,7 @@ function updateAutomatedSimulation() {
 			carsTotal: getTotalVehicles(),
 			simulatedTime,
 			get avgSpeed() {
-				return ((122.5 * 3) / this.avgTime) * 3.6;
+				return (((122.5 * 3) / this.avgTime) * 3.6) ?? 0;
 			},
 			get occupationRate() {
 				return (this.carsTotal * 0.5 / this.simulatedTime * 60 * 60 ) / 4200 // taxa de fluxo de parte simétrica / fluxo de saturação teórico

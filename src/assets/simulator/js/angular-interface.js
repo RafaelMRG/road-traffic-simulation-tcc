@@ -94,7 +94,7 @@ const getFilteredCars = function () {
 
 const getAvgCarTimes = function () {
 	const deltas = getFilteredCars();
-
+	if (deltas.length === 0) return Number.POSITIVE_INFINITY
 	const sum = deltas.reduce((a, b) => a + b, 0);
 	const avg = sum / deltas.length || 0;
 	console.log('Tempo médio das rotas: ' + avg)
