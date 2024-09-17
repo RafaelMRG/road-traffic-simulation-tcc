@@ -60,12 +60,13 @@ export class OptimizationSettingsService {
 			Validators.max(this.LIMITS.selecteds.max),
 			Validators.min(this.LIMITS.selecteds.min),
 		]),
+		mutationMethod: new FormControl<'rim' | 'pbm'>('rim', [Validators.required])
 	});
 
 	public optimizationStopCriteria = new FormGroup({
-		minGenerations: new FormControl<number>(0),
-		maxGenerations: new FormControl<number>(0),
-		avgTimeDelta: new FormControl<number>(0),
+		minGenerations: new FormControl<number>(6),
+		maxGenerations: new FormControl<number>(12),
+		avgTimeDelta: new FormControl<number>(0.3),
 	})
 
 	startSimulation() {

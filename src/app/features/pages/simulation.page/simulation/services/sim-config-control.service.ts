@@ -38,8 +38,13 @@ export class SimConfigControlService {
 		);
 	}
 
+	resetResult() {
+		this.results = [];
+	}
+
 	resetConfig() {
 		this.isAutomatedSimulation = false;
+		this.resetResult();
 	}
 
 	simConfig: SimConfiguration = {

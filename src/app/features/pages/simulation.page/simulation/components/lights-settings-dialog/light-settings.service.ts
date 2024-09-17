@@ -122,8 +122,8 @@ export class LightSettingsService {
 	public readonly RED_MAX = 90;
 	public readonly GREEN_MIN = 30;
 	public readonly GREEN_MAX = 90;
-	public readonly CYCLE_MAX = 300;
-	public readonly CYCLE_MIN = 0;
+	public readonly CYCLE_MAX = 120;
+	public readonly CYCLE_MIN = 30;
 
 	private getRandomInteger(min: number, max: number) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;

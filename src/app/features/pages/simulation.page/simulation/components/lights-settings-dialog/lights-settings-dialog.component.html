@@ -85,6 +85,11 @@
 
 </div>
 <div mat-dialog-actions class="d-flex justify-content-between px-4">
-  <button (click)="lightSettingsSvc.setStartingParams()" mat-flat-button color="primary" mat-dialog-close>Fechar</button>
+	<div>
+		<button (click)="lightSettingsSvc.setStartingParams()" mat-flat-button color="basic" mat-dialog-close>Fechar
+		</button>
+		<button (click)="lightSettingsSvc.setStartingParams()" mat-flat-button color="primary">Salvar
+		</button>
+	</div>
   <button (click)="lightSettingsSvc.randomizeLightsParameters()" mat-flat-button color="primary">Randomizar</button>
 </div>

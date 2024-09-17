@@ -58,11 +58,10 @@ export class SimService {
 			if (this.simConfSvc.simulationId === undefined) throw new Error('ID de simulação é indefinido')
 			await this.api.processGenerationResults(this.simConfSvc.simulationId, this.simConfSvc.results)
 				.then((result) => this.simConfSvc.optimizationLightCfg = result);
-			// asks backend for next generation
-			const backEndResult: LightPhasing[][] | null = null;
+			const backEndResult: LightPhasing[][] | null = this.simConfSvc.optimizationLightCfg;
 
 			this.simConfSvc.currentPopulation = 1;
-			if (backEndResult === null) {
+			if (backEndResult === null || backEndResult.length === 0) {
 				this.simConfSvc.isAutomatedSimulation = false; // Desabilita modo de automação
 				this.simulationIsDone = true;
 				this.simConfSvc.currentGeneration = 1;
@@ -76,6 +75,7 @@ export class SimService {
 				);
 				await this.startSimulation(true);
 			}
+			this.simConfSvc.resetResult();
 			return;
 		}
 		this.snackbar.showNotification(
@@ -86,15 +86,15 @@ export class SimService {
 	}
 
 	async startSimulation(skipGenerationReset?: boolean) {
-		this.simConfSvc.simulationId =
-			await this.api.createSimulation(this.simConfSvc.simConfig)
-			.then(res => res.id);
-		// ask backend to create simulation
-		this.lightSvc.setOptimizationLights();
-		this.simConfSvc.currentPopulation = 1;
 		if (!skipGenerationReset){
+			this.simConfSvc.simulationId =
+				await this.api.createSimulation(this.simConfSvc.simConfig)
+				.then(res => res.id);
+			// ask backend to create simulation
+			this.lightSvc.setOptimizationLights();
 			this.simConfSvc.currentGeneration = 1;
 		}
+		this.simConfSvc.currentPopulation = 1;
 		this.simConfSvc.simConfig.lightsConfig = this.simConfSvc.optimizationLightCfg[0];
 		this.simConfSvc.isAutomatedSimulation = true;
 		this.simCommsSvc.restartSim();

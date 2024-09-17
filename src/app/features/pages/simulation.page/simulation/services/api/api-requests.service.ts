@@ -3,6 +3,7 @@ import { ApiRequests } from "./api.interface";
 import { GenerationInstruction, GenerationResults, SimConfiguration } from "../models";
 import { HttpClient } from "@angular/common/http";
 import { firstValueFrom } from "rxjs";
+import { Simulation } from "../backend-models";
 
 @Injectable({
   providedIn: 'root'
@@ -27,15 +28,15 @@ export class ApiRequestsService implements ApiRequests {
     )
   }
 
-  getAllSimulations(): Promise<Record<string, number | string>[]> {
+  getAllSimulations(): Promise<Simulation[]> {
     return firstValueFrom(
-       this.http.get<Record<string, number | string>[]>(this.BASE_URL + '/simulation/all')
+       this.http.get<Simulation[]>(this.BASE_URL + '/simulation/all')
     )
   }
 
-  getFinalResults(id: number): Promise<Record<string, number | string>> {
+  getFinalResults(id: number): Promise<Simulation> {
     return firstValueFrom(
-       this.http.get<Record<string, number | string>>(this.BASE_URL + '/simulation/final-results/' + id)
+       this.http.get<Simulation>(this.BASE_URL + '/simulation/final-results/' + id)
     )
   }
 

@@ -6,6 +6,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatSliderModule } from "@angular/material/slider";
 import { OptimizationSettingsService } from "src/app/features/pages/simulation.page/simulation/components/optimization-dialog/optimization-settings.service";
+import { MatOption, MatSelect } from "@angular/material/select";
 
 @Component({
 	selector: "app-optimization-dialog",
@@ -17,6 +18,8 @@ import { OptimizationSettingsService } from "src/app/features/pages/simulation.p
 		MatIconModule,
 		ReactiveFormsModule,
 		MatSliderModule,
+		MatSelect,
+		MatOption
 	],
 	templateUrl: "./optimization-dialog.component.html",
 	styleUrl: "./optimization-dialog.component.scss",

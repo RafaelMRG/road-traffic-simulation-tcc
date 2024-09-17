@@ -38,7 +38,7 @@
 				<h6>Configuração por geração</h6>
 				<div class="col-auto">
 					<mat-form-field>
-						<mat-label>N° de iterações</mat-label>
+						<mat-label>População</mat-label>
 						<input matInput type="number" formControlName="population">
 						@if (optimizationSettingsSvc.runSettings.controls.population.value !==
 						optimizationSettingsSvc.LIMITS.population.default) {
@@ -79,6 +79,16 @@
 								<mat-icon>close</mat-icon>
 							</button>
 						}
+					</mat-form-field>
+				</div>
+
+				<div class="col-5">
+					<mat-form-field appearance="fill" style="width: 100%">
+						<mat-label>Método de mutação</mat-label>
+						<mat-select formControlName="mutationMethod" style="width: 100%">
+							<mat-option value="rim">Mutação individual aleatória</mat-option>
+							<mat-option value="pbm">Mutação baseada em probabilidade</mat-option>
+						</mat-select>
 					</mat-form-field>
 				</div>
 

@@ -2,6 +2,7 @@ import {
 	GenerationInstruction,
 	GenerationResults, SimConfiguration
 } from "src/app/features/pages/simulation.page/simulation/services/models";
+import { Simulation } from "../backend-models";
 
 export interface ApiRequests {
 	createSimulation: (simulationParams: Partial<SimConfiguration>) => Promise<{ id: number }>;
@@ -10,6 +11,6 @@ export interface ApiRequests {
 	endSimulation: (id: number) => Promise<void>;
 
 	// stats
-	getFinalResults: (id: number) => Promise<Record<string, number | string>>;
-	getAllSimulations: () => Promise<Record<string, number | string>[]>;
+	getFinalResults: (id: number) => Promise<Simulation>;
+	getAllSimulations: () => Promise<Simulation[]>;
 }
