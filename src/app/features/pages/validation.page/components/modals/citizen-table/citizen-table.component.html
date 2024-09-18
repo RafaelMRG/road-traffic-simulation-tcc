@@ -1,30 +1,41 @@
 <!-- citizen-table-modal.component.html -->
-<h2 mat-dialog-title>Citizens</h2>
+<h2 mat-dialog-title>Cidadãos</h2>
 <mat-dialog-content>
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+		<ng-container matColumnDef="citizenId">
+			<th mat-header-cell *matHeaderCellDef> ID</th>
+			<td mat-cell *matCellDef="let element"> {{ element.citizenId }}</td>
+		</ng-container>
+
 		<ng-container matColumnDef="duration">
-			<th mat-header-cell *matHeaderCellDef> Duration</th>
+			<th mat-header-cell *matHeaderCellDef> T. Simulado</th>
 			<td mat-cell *matCellDef="let element"> {{ element.duration }}</td>
 		</ng-container>
 
-		<ng-container matColumnDef="trip_avg">
-			<th mat-header-cell *matHeaderCellDef> Trip Avg</th>
-			<td mat-cell *matCellDef="let element"> {{ element.trip_avg }}</td>
+		<ng-container matColumnDef="tripAvg">
+			<th mat-header-cell *matHeaderCellDef> T. Médio de viagem</th>
+			<td mat-cell *matCellDef="let element"> {{ element.tripAvg }}</td>
 		</ng-container>
 
-		<ng-container matColumnDef="occupation_rate">
-			<th mat-header-cell *matHeaderCellDef> Occupation Rate</th>
-			<td mat-cell *matCellDef="let element"> {{ element.occupation_rate }}</td>
+		<ng-container matColumnDef="occupationRate">
+			<th mat-header-cell *matHeaderCellDef> Taxa de ocupação</th>
+			<td mat-cell *matCellDef="let element"> {{ element.occupationRate }}</td>
 		</ng-container>
 
-		<ng-container matColumnDef="vehicles_total">
-			<th mat-header-cell *matHeaderCellDef> Vehicles Total</th>
-			<td mat-cell *matCellDef="let element"> {{ element.vehicles_total }}</td>
+		<ng-container matColumnDef="vehiclesTotal">
+			<th mat-header-cell *matHeaderCellDef> Total de vei.</th>
+			<td mat-cell *matCellDef="let element"> {{ element.vehiclesTotal }}</td>
 		</ng-container>
 
-		<ng-container matColumnDef="average_speed">
-			<th mat-header-cell *matHeaderCellDef> Average Speed</th>
-			<td mat-cell *matCellDef="let element"> {{ element.average_speed }}</td>
+		<ng-container matColumnDef="averageSpeed">
+			<th mat-header-cell *matHeaderCellDef> V. Média</th>
+			<td mat-cell *matCellDef="let element"> {{ element.averageSpeed }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="createdAt">
+			<th mat-header-cell *matHeaderCellDef> Criado em</th>
+			<td mat-cell *matCellDef="let element"> {{ (element.createdAt + 'Z') | date: 'dd-MM-yyyy HH:mm:ss' }}</td>
 		</ng-container>
 
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -10,8 +10,8 @@ export class GenerationBestTimePipe implements PipeTransform {
   transform(citizens: Citizen[]): number {
     let biggestAvgTime: number = Number.POSITIVE_INFINITY;
     citizens.forEach(citizen => {
-      if (citizen.trip_avg < biggestAvgTime) {
-        biggestAvgTime = citizen.trip_avg;
+      if (citizen.tripAvg < biggestAvgTime) {
+        biggestAvgTime = citizen.tripAvg;
       }
     })
     return biggestAvgTime;

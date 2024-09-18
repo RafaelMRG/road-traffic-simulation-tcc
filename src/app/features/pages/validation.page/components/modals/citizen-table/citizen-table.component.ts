@@ -8,16 +8,17 @@ import {
 } from "@angular/material/dialog";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatButtonModule } from "@angular/material/button";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: 'app-citizen-table',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogTitle],
+  imports: [MatTableModule, MatButtonModule, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogTitle, DatePipe],
   templateUrl: './citizen-table.component.html',
   styleUrl: './citizen-table.component.scss'
 })
 export class CitizenTableComponent {
-  displayedColumns: string[] = ['duration', 'trip_avg', 'occupation_rate', 'vehicles_total', 'average_speed'];
+  displayedColumns: string[] = ['citizenId','duration', 'tripAvg', 'occupationRate', 'vehiclesTotal', 'averageSpeed', 'createdAt'];
   dataSource = new MatTableDataSource(this.data);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {

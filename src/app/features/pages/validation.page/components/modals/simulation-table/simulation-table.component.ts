@@ -6,6 +6,7 @@ import { GenerationTableComponent } from "../generation-table/generation-table.c
 import { MatButtonModule } from "@angular/material/button";
 import { ApiRequestsService } from "../../../../simulation.page/simulation/services/api/api-requests.service";
 import { MatProgressBar } from "@angular/material/progress-bar";
+import { DatePipe } from "@angular/common";
 
 @Component({
 	selector: "app-simulation-table",
@@ -13,7 +14,8 @@ import { MatProgressBar } from "@angular/material/progress-bar";
 	imports: [
 		MatTableModule,
 		MatButtonModule,
-		MatProgressBar
+		MatProgressBar,
+		DatePipe
 	],
 	templateUrl: "./simulation-table.component.html",
 	styleUrl: "./simulation-table.component.scss"
@@ -32,7 +34,7 @@ export class SimulationTableComponent implements OnInit {
 
 	showError = false;
 
-	displayedColumns: string[] = ["selecteds", "mutation_rate", "population", "avg_time_delta", "max_generations", "min_generations", "actions"];
+	displayedColumns: string[] = ["simulationId", "selecteds", "mutationRate", "population", "avgTimeDelta", "maxGenerations", "minGenerations", "actions", "createdAt"];
 	dataSource?: MatTableDataSource<Simulation>;
 
 	constructor(public dialog: MatDialog) {
@@ -42,7 +44,7 @@ export class SimulationTableComponent implements OnInit {
 		this.dialog.open(GenerationTableComponent, {
 			data: simulation.generations,
 			height: "80vh",
-			width: "66vw"
+			width: "85vw"
 		});
 	}
 }
