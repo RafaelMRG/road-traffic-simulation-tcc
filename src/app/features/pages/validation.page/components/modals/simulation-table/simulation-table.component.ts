@@ -22,6 +22,7 @@ import { DatePipe } from "@angular/common";
 })
 export class SimulationTableComponent implements OnInit {
 	api: ApiRequestsService = inject(ApiRequestsService);
+	lastUpdated?: Date;
 
 	ngOnInit() {
 		this.api.getAllSimulations()
@@ -29,7 +30,8 @@ export class SimulationTableComponent implements OnInit {
 				(sims: Simulation[]) => {
 					this.dataSource = new MatTableDataSource(sims);
 				})
-			.catch(() => this.showError = true);
+			.catch(() => this.showError = true)
+			.finally(() => this.lastUpdated = new Date());
 	}
 
 	showError = false;

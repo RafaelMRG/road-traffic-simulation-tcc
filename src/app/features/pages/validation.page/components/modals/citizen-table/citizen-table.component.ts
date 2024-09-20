@@ -18,7 +18,7 @@ import { DatePipe } from "@angular/common";
   styleUrl: './citizen-table.component.scss'
 })
 export class CitizenTableComponent {
-  displayedColumns: string[] = ['citizenId','duration', 'tripAvg', 'occupationRate', 'vehiclesTotal', 'averageSpeed', 'createdAt'];
+  displayedColumns: string[] = ['row', 'citizenId','duration', 'tripAvg', 'occupationRate', 'vehiclesTotal', 'averageSpeed', 'createdAt'];
   dataSource = new MatTableDataSource(this.data);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {

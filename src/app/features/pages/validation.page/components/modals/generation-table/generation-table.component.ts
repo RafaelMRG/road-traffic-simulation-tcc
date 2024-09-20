@@ -23,7 +23,7 @@ import { DatePipe } from "@angular/common";
   styleUrl: './generation-table.component.scss'
 })
 export class GenerationTableComponent {
-  displayedColumns: string[] = ['generationId', 'citizens', 'bestTime', 'actions', 'createdAt'];
+  displayedColumns: string[] = ['row', 'generationId', 'citizens', 'bestTime', 'actions', 'createdAt'];
   dataSource = new MatTableDataSource<Generation>(this.data);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Generation[], public dialog: MatDialog) {
