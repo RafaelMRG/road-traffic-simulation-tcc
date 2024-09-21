@@ -2,6 +2,7 @@ export type Simulation = {
 	simulationId: number;
 	selecteds: number;
 	mutationRate: number;
+	mutationMethod: string;
 	population: number;
 	avgTimeDelta: number;
 	maxGenerations: number;

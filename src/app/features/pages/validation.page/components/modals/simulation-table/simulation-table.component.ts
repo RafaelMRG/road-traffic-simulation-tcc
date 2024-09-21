@@ -7,6 +7,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { ApiRequestsService } from "../../../../simulation.page/simulation/services/api/api-requests.service";
 import { MatProgressBar } from "@angular/material/progress-bar";
 import { DatePipe } from "@angular/common";
+import { MatTooltip } from "@angular/material/tooltip";
+import { MutationMethodPipe } from "../../../../../shared/mutation-method.pipe";
 
 @Component({
 	selector: "app-simulation-table",
@@ -15,7 +17,9 @@ import { DatePipe } from "@angular/common";
 		MatTableModule,
 		MatButtonModule,
 		MatProgressBar,
-		DatePipe
+		DatePipe,
+		MatTooltip,
+		MutationMethodPipe
 	],
 	templateUrl: "./simulation-table.component.html",
 	styleUrl: "./simulation-table.component.scss"
@@ -42,7 +46,7 @@ export class SimulationTableComponent implements OnInit {
 
 	showError = false;
 
-	displayedColumns: string[] = ["simulationId", "selecteds", "mutationRate", "population", "avgTimeDelta", "maxGenerations", "minGenerations", "actions", "createdAt"];
+	displayedColumns: string[] = ["simulationId", "selecteds", "mutationRate", "mutationMethod", "population", "avgTimeDelta", "maxGenerations", "minGenerations", "actions", "createdAt"];
 	dataSource?: MatTableDataSource<Simulation>;
 
 	constructor(public dialog: MatDialog) {
