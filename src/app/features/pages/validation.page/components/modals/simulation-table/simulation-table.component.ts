@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, ViewChild } from "@angular/core";
 import { Simulation } from "../../../../simulation.page/simulation/services/backend-models";
-import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatTable, MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatDialog } from "@angular/material/dialog";
 import { GenerationTableComponent } from "../generation-table/generation-table.component";
 import { MatButtonModule } from "@angular/material/button";
@@ -24,6 +24,8 @@ export class SimulationTableComponent implements OnInit {
 	api: ApiRequestsService = inject(ApiRequestsService);
 	lastUpdated?: Date;
 
+	@ViewChild('table') table?: MatTable<any>;
+
 	ngOnInit() {
 		this.api.getAllSimulations()
 			.then(
@@ -32,6 +34,10 @@ export class SimulationTableComponent implements OnInit {
 				})
 			.catch(() => this.showError = true)
 			.finally(() => this.lastUpdated = new Date());
+	}
+
+	updateTable(){
+		this.table?.renderRows();
 	}
 
 	showError = false;

@@ -44,7 +44,7 @@
               <button mat-raised-button color="warn" (click)="simService.stopAutomatedSimulation()">Forçar parada</button>
               <button mat-flat-button color="primary" class="w-100">Iteração: {{simConfigService.currentPopulation}} de {{ simConfigService.simConfig.population }}</button>
             } @else {
-              <button mat-flat-button color="primary"><mat-icon class="text-warning fw-bolder">done</mat-icon> Simulação terminou</button>
+              <button matTooltip="Clique para ver os botões novamente" (click)="simService.simulationIsDone = false" mat-flat-button color="primary"><mat-icon class="text-warning fw-bolder">done</mat-icon> Simulação terminou</button>
             }
           </div>
         }

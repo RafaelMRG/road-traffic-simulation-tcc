@@ -27,6 +27,7 @@ import {
 	SimConfigControlService
 } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
 import { SimService } from "src/app/features/pages/simulation.page/simulation/services/sim.service";
+import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
 	selector: "app-multiple-simulations.page",
@@ -39,7 +40,8 @@ import { SimService } from "src/app/features/pages/simulation.page/simulation/se
 		ReactiveFormsModule,
 		JsonPipe,
 		MatDividerModule,
-		MatDialogModule
+		MatDialogModule,
+		MatTooltip
 	],
 	templateUrl: "./simulation.page.component.html",
 	styleUrl: "./simulation.page.component.scss"
