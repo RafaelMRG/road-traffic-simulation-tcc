@@ -10,11 +10,12 @@ import {
 } from "@angular/material/dialog";
 import { CitizenTableComponent } from "../citizen-table/citizen-table.component";
 import { MatButtonModule } from "@angular/material/button";
-import { Generation } from "../../../../simulation.page/simulation/services/backend-models";
+import { Citizen, Generation } from "../../../../simulation.page/simulation/services/backend-models";
 import { GenerationBestTimePipe } from "./generation-best-time.pipe";
 import { MatIconModule } from "@angular/material/icon";
 import { GenerationsGraphComponent } from "../generations-graph/generations-graph.component";
 import { DatePipe } from "@angular/common";
+import { BestSemaphoreVisualComponent } from "../best-semaphore-visual/best-semaphore-visual.component";
 
 @Component({
   selector: 'app-generation-table',
@@ -26,6 +27,7 @@ import { DatePipe } from "@angular/common";
 export class GenerationTableComponent {
   displayedColumns: string[] = ['row', 'generationId', 'citizens', 'bestTime', 'actions', 'createdAt'];
   dataSource = new MatTableDataSource<Generation>(this.data);
+  private bestCitizen?: Citizen;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Generation[], public dialog: MatDialog) {
   }
@@ -46,4 +48,24 @@ export class GenerationTableComponent {
     })
   }
 
+  openBest(){
+	  this.setBestCitizen();
+	  this.dialog.open(BestSemaphoreVisualComponent, {
+		data: this.bestCitizen?.roadCrossings,
+		height: '55vh',
+		width: '45vw',
+	})
+  }
+
+  private setBestCitizen(){
+	  let bestCitizen: Citizen | undefined = undefined;
+	  this.data.forEach((generation) => {
+		  generation.citizens.forEach((citizen) => {
+			  if (!bestCitizen || citizen.tripAvg < bestCitizen.tripAvg) {
+				  bestCitizen = citizen;
+			  }
+		  });
+	  });
+	  this.bestCitizen = bestCitizen;
+  }
 }

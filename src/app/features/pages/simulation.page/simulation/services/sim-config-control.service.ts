@@ -19,8 +19,6 @@ export class SimConfigControlService {
 
 	/**
 	 * 1-index based
-	 *
-	 * @type {number}
 	 */
 	currentPopulation = 1;
 	currentGeneration = 1;

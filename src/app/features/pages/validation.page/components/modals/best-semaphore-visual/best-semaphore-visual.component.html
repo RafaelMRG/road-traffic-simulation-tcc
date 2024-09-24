@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Configuração de semáforo</h2>
+<div mat-dialog-content>
+	@if (data == undefined){
+		<strong class="py-3">Configuração de semáforo não encontrada</strong>
+	} @else {
+		<div class="semaphore-container">
+			<div class="semaphore" *ngFor="let crossing of data">
+				<div class="semaphore-light">
+					<div class="semaphore-body">
+						<div class="light red-light"></div>
+						<div class="light yellow-light"></div>
+						<div class="light green-light"></div>
+					</div>
+				</div>
+				<div class="info">
+					<p>Green Duration: {{ crossing.greenDuration }} seconds</p>
+					<p>Red Duration: {{ crossing.redDuration }} seconds</p>
+					<p>Cycle Start Time: {{ crossing.cycleStartTime }} seconds</p>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+<div mat-dialog-actions>
+	<button mat-button mat-dialog-close>Fechar</button>
+</div>

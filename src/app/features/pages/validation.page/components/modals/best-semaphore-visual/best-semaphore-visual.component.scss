@@ -1,0 +1,51 @@
+.semaphore-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.semaphore {
+  text-align: center;
+}
+
+.semaphore-light {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.semaphore-body {
+  background-color: #ccc; /* Grayish background */
+  width: 80px;
+  height: 200px;
+  border: 2px solid #333; /* Darker border */
+  border-radius: 15px; /* Rounded corners */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.light {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #333; /* Add border around lights */
+}
+
+.red-light {
+  background-color: red;
+}
+
+.yellow-light {
+  background-color: yellow;
+}
+
+.green-light {
+  background-color: green;
+}
+
+.info {
+  margin-top: 10px;
+}
