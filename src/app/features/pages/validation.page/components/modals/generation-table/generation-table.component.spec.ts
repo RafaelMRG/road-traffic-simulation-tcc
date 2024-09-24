@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GenerationTableComponent } from './generation-table.component';
+import { GenerationTableComponent } from "./generation-table.component";
 
 describe('GenerationTableComponent', () => {
   let component: GenerationTableComponent;

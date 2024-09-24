@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { OptimizationSettingsService } from './optimization-settings.service';
+import { OptimizationSettingsService } from "./optimization-settings.service";
 
 describe('OptimizationSettingsService', () => {
   let service: OptimizationSettingsService;

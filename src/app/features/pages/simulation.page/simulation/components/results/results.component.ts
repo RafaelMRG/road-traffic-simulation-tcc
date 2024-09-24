@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { SingleOutputComponent, SingleResult } from 'src/app/features/pages/simulation.page/simulation/components/results/single-output/single-output.component';
+import { Component } from "@angular/core";
+import {
+	SingleOutputComponent,
+	SingleResult
+} from "src/app/features/pages/simulation.page/simulation/components/results/single-output/single-output.component";
 
 @Component({
   selector: 'app-results',

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { OptimizationDialogComponent } from './optimization-dialog.component';
+import { OptimizationDialogComponent } from "./optimization-dialog.component";
 
 describe('OptimizationDialogComponent', () => {
   let component: OptimizationDialogComponent;

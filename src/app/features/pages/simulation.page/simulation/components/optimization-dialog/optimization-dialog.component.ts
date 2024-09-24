@@ -5,7 +5,9 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatSliderModule } from "@angular/material/slider";
-import { OptimizationSettingsService } from "src/app/features/pages/simulation.page/simulation/components/optimization-dialog/optimization-settings.service";
+import {
+	OptimizationSettingsService
+} from "src/app/features/pages/simulation.page/simulation/components/optimization-dialog/optimization-settings.service";
 import { MatOption, MatSelect } from "@angular/material/select";
 
 @Component({
@@ -32,7 +34,7 @@ export class OptimizationDialogComponent implements OnInit {
 		this.optimizationSettingsSvc.optimizationStopCriteria.get('minGenerations')?.setValidators([this.validateRange.bind(this)]);
 	}
 
-	validateRange(control: AbstractControl): { [key: string]: boolean } | null {
+	validateRange(_control: AbstractControl): { [key: string]: boolean } | null {
 		const min = this.optimizationSettingsSvc.optimizationStopCriteria.get('minGenerations')?.value ?? 0;
 		const max = this.optimizationSettingsSvc.optimizationStopCriteria.get('maxGenerations')?.value ?? 0;
 		console.log(min, max)

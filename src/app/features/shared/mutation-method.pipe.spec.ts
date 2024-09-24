@@ -1,4 +1,4 @@
-import { MutationMethodPipe } from './mutation-method.pipe';
+import { MutationMethodPipe } from "./mutation-method.pipe";
 
 describe('MutationMethodPipe', () => {
   it('create an instance', () => {

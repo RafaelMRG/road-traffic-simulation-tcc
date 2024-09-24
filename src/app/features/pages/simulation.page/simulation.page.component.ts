@@ -1,13 +1,5 @@
 import { JsonPipe } from "@angular/common";
-import {
-	AfterViewInit,
-	Component,
-	ElementRef,
-	inject,
-	OnDestroy,
-	OnInit,
-	ViewChild
-} from "@angular/core";
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -22,10 +14,6 @@ import {
 import {
 	OptimizationDialogComponent
 } from "src/app/features/pages/simulation.page/simulation/components/optimization-dialog/optimization-dialog.component";
-import { SimCommsService } from "src/app/features/pages/simulation.page/simulation/services/sim-comms.service";
-import {
-	SimConfigControlService
-} from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
 import { SimService } from "src/app/features/pages/simulation.page/simulation/services/sim.service";
 import { MatTooltip } from "@angular/material/tooltip";
 
@@ -49,19 +37,17 @@ import { MatTooltip } from "@angular/material/tooltip";
 export class SimulationsPageComponent implements OnInit, OnDestroy, AfterViewInit {
 	constructor() {
 		this.carFollowingChanges =
-			this.simConfigService.carFollowingControl.valueChanges.subscribe(() =>
-				this.simConfigService.updateSliders()
+			this.simService.simConfSvc.carFollowingControl.valueChanges.subscribe(() =>
+				this.simService.simConfSvc.updateSliders()
 			);
 
 		this.trafficControlChanges =
-			this.simConfigService.trafficControl.valueChanges.subscribe(() =>
-				this.simConfigService.updateSliders()
+			this.simService.simConfSvc.trafficControl.valueChanges.subscribe(() =>
+				this.simService.simConfSvc.updateSliders()
 			);
 	}
 
 	protected simService: SimService = inject(SimService);
-	protected simConfigService = inject(SimConfigControlService);
-	protected simCommsService = inject(SimCommsService);
 	protected dialog = inject(MatDialog);
 
 	protected readonly units = {
@@ -88,7 +74,7 @@ export class SimulationsPageComponent implements OnInit, OnDestroy, AfterViewIni
 	}
 
 	ngAfterViewInit(): void {
-		this.simCommsService.frameWindow = this.frameWindow;
+		this.simService.simCommsSvc.frameWindow = this.frameWindow;
 	}
 
 	get frameWindow() {
@@ -96,11 +82,11 @@ export class SimulationsPageComponent implements OnInit, OnDestroy, AfterViewIni
 	}
 
 	protected get isAutoControl() {
-		return this.simConfigService.isAutomatedSimulation;
+		return this.simService.simConfSvc.isAutomatedSimulation;
 	}
 
 	initRunConfig() {
-		this.simConfigService.updateSliders();
+		this.simService.simConfSvc.updateSliders();
 		this.simService.handleSimIframeInitialState();
 	}
 

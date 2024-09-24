@@ -2,6 +2,7 @@
 // transversal dynamics during lane change 
 // (fraction<1: starts at fraction*laneStart+(1-fraction)*laneEnd)
 //##################################
+// noinspection JSUnusedLocalSymbols
 
 //var dt_LC=4; // duration of a lane change (4)
 

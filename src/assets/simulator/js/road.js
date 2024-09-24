@@ -1,6 +1,8 @@
 //Math.seedrandom(42);
 //console.log(Math.random());          // Always 0.0016341939679719736 with 42
 //console.log(Math.random());          //s Always 0.9364577392619949 with 42
+// noinspection JSUnusedLocalSymbols
+
 Math.seedrandom(42); // !! re-start reproducibly (undo console logs)
 
 //#############################################################

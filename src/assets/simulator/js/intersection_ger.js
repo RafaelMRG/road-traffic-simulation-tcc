@@ -2,6 +2,7 @@
 //#############################################################
 // general ui settings
 //#############################################################
+// noinspection JSUnusedLocalSymbols
 
 const userCanDropObjects=true;
 var showCoords=true;  // show logical coords of nearest road to mouse pointer

@@ -1,4 +1,6 @@
 
+// noinspection JSUnusedLocalSymbols
+
 /*#############################################################
 * implements a fixed-time traffic light control 
 

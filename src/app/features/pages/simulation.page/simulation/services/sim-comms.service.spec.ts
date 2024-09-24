@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { SimCommsService } from './sim-comms.service';
+import { SimCommsService } from "./sim-comms.service";
 
 describe('SimCommsService', () => {
   let service: SimCommsService;

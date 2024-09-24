@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { MatIconRegistry } from '@angular/material/icon';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatIcon } from '@angular/material/icon';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { NavbarComponent } from 'src/app/features/navbar/navbar.component';
-import { CommonModule } from '@angular/common';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatDivider } from '@angular/material/divider';
-import { MatButtonModule } from '@angular/material/button';
+import { Component } from "@angular/core";
+import { RouterModule, RouterOutlet } from "@angular/router";
+import { MatIcon, MatIconRegistry } from "@angular/material/icon";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { NavbarComponent } from "src/app/features/navbar/navbar.component";
+import { CommonModule } from "@angular/common";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatDivider } from "@angular/material/divider";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
 	selector: 'app-root',
@@ -28,7 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
 	styleUrl: './app.component.scss',
 })
 export class AppComponent {
-	constructor(private iconReg: MatIconRegistry, private snackbar: MatSnackBar) {
+	constructor(private iconReg: MatIconRegistry) {
 		this.iconReg.setDefaultFontSetClass('material-symbols-rounded');
 	}
 

@@ -15,23 +15,27 @@ export class SimService {
 	constructor() {
 	}
 
-	private simCommsSvc = inject(SimCommsService);
-	private simConfSvc = inject(SimConfigControlService);
+	private _simCommsSvc: SimCommsService = inject(SimCommsService);
+	private _simConfSvc = inject(SimConfigControlService);
 	private snackbar = inject(SnackbarService);
 	private api = inject(ApiRequestsService);
-	private lightSvc = inject(LightSettingsService);
+	private _lightSvc = inject(LightSettingsService);
+
+	get simCommsSvc() { return this._simCommsSvc; }
+	get simConfSvc() { return this._simConfSvc; }
+	get lightSvc() { return this._lightSvc; }
 
 	simulationIsDone = false;
 
 	/** Stops the simulation from running when opening the page */
 	handleSimIframeInitialState() {
-		setTimeout(() => this.simCommsSvc.restartSim(), 100);
+		setTimeout(() => this._simCommsSvc.restartSim(), 100);
 
 		if (!this.simConfSvc.isAutomatedSimulation) return;
 	}
 
 	private postAutomatedSimulation() {
-		this.simCommsSvc.postMessage({
+		this._simCommsSvc.postMessage({
 			type: "function",
 			data: this.simConfSvc.simConfig,
 			functionName: "automatedSimulation"
@@ -73,7 +77,9 @@ export class SimService {
 					"Iniciando próxima geração em 5 segundos",
 					"info"
 				);
-				await this.startSimulation(true);
+				setTimeout(() => {
+					this.startSimulation(true);
+				}, 5000)
 			}
 			this.simConfSvc.resetResult();
 			return;
@@ -93,6 +99,7 @@ export class SimService {
 			// ask backend to create simulation
 			this.lightSvc.setOptimizationLights();
 			this.simConfSvc.currentGeneration = 1;
+			this.simulationIsDone = false;
 		}
 		this.simConfSvc.currentPopulation = 1;
 		this.simConfSvc.simConfig.lightsConfig = this.simConfSvc.optimizationLightCfg[0];

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { ResultsComponent } from 'src/app/features/pages/simulation.page/simulation/components/results/results.component';
+import { Component } from "@angular/core";
+import {
+  ResultsComponent
+} from "src/app/features/pages/simulation.page/simulation/components/results/results.component";
 import { SimulationTableComponent } from "./components/modals/simulation-table/simulation-table.component";
 
 @Component({

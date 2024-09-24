@@ -1,11 +1,12 @@
 import { Component, Inject } from "@angular/core";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent, MatDialogTitle
+	MAT_DIALOG_DATA,
+	MatDialog,
+	MatDialogActions,
+	MatDialogClose,
+	MatDialogContent,
+	MatDialogTitle
 } from "@angular/material/dialog";
 import { CitizenTableComponent } from "../citizen-table/citizen-table.component";
 import { MatButtonModule } from "@angular/material/button";

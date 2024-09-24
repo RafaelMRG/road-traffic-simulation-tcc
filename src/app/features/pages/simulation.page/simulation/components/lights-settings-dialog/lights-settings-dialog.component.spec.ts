@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { LightsSettingsDialogComponent } from './lights-settings-dialog.component';
+import { LightsSettingsDialogComponent } from "./lights-settings-dialog.component";
 
 describe('LightsSettingsDialogComponent', () => {
   let component: LightsSettingsDialogComponent;

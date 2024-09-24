@@ -1,6 +1,7 @@
 import {
 	GenerationInstruction,
-	GenerationResults, SimConfiguration
+	GenerationResults,
+	SimConfiguration
 } from "src/app/features/pages/simulation.page/simulation/services/models";
 import { Simulation } from "../backend-models";
 

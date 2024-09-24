@@ -1,7 +1,6 @@
 import { inject, Injectable } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { GenerationResults, SimConfiguration } from "src/app/features/pages/simulation.page/simulation/services/models";
-import { SimConfigControlService } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { SimConfiguration } from "src/app/features/pages/simulation.page/simulation/services/models";
 import { SimService } from "src/app/features/pages/simulation.page/simulation/services/sim.service";
 import { LightSettingsService } from "../lights-settings-dialog/light-settings.service";
 
@@ -13,7 +12,7 @@ export class OptimizationSettingsService {
 		this.setStartingParams();
 	}
 
-	private simConfSvc = inject(SimConfigControlService);
+	private get simConfSvc () { return this.simSvc.simConfSvc};
 	private lightSvc = inject(LightSettingsService);
 	private simSvc = inject(SimService);
 

@@ -1,3 +1,5 @@
+// noinspection JSUnusedLocalSymbols
+
 const UPDATE_EVENT_STR = "updateTLStates";
 const UPDATE_EVENT = new Event(UPDATE_EVENT_STR);
 

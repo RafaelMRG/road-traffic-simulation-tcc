@@ -11,7 +11,7 @@ import {
 	MatDialogTitle
 } from "@angular/material/dialog";
 import { Generation } from "../../../../simulation.page/simulation/services/backend-models";
-import { Chart } from 'chart.js/auto';
+import { Chart } from "chart.js/auto";
 
 @Component({
   selector: 'app-generations-graph',

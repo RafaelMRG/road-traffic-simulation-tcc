@@ -1,9 +1,9 @@
-import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatToolbar } from '@angular/material/toolbar';
-import {MatTooltip} from '@angular/material/tooltip'
+import { NgClass } from "@angular/common";
+import { Component, EventEmitter, Output } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIcon } from "@angular/material/icon";
+import { MatToolbar } from "@angular/material/toolbar";
+import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-navbar',

@@ -2,6 +2,8 @@
 //###############################################################
 // mouse and touch event callbacks
 //###############################################################
+// noinspection JSUnusedLocalSymbols
+
 /*
           onmouseenter="handleMouseEnter(event)"
           onmousedown="handleMouseDown(event)"

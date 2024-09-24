@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GenerationsGraphComponent } from './generations-graph.component';
+import { GenerationsGraphComponent } from "./generations-graph.component";
 
 describe('GenerationsGraphComponent', () => {
   let component: GenerationsGraphComponent;

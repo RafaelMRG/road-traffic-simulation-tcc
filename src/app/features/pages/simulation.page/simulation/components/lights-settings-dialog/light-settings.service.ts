@@ -1,7 +1,7 @@
-import { inject, Injectable } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { SimConfigControlService } from 'src/app/features/pages/simulation.page/simulation/services/sim-config-control.service';
+import { inject, Injectable } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
 import { LightPhasing } from "../../services/models";
+import { SimService } from "../../services/sim.service";
 
 @Injectable({
 	providedIn: "root",
@@ -11,7 +11,8 @@ export class LightSettingsService {
 		this.setStartingParams();
 	}
 
-	private simConfSvc = inject(SimConfigControlService);
+	private simService = inject(SimService);
+	get simConfSvc() { return this.simService.simConfSvc};
 
 	public runSettings = new FormGroup({
 		semaphore1RedDuration: new FormControl<number>(30),

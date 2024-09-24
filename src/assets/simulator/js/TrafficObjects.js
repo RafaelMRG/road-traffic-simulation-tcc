@@ -1,4 +1,6 @@
 
+// noinspection JSUnusedLocalSymbols
+
 /*#############################################################
 a set of traffic-related objects that can be dragged by the user 
 from a "depot" to a network link (road) and back. 

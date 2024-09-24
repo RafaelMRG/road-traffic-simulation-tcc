@@ -1,3 +1,5 @@
+// noinspection JSUnusedLocalSymbols
+
 logColor = (text, color = 'green') => {
   if (typeof text === 'object') text = JSON.stringify(text, null, 3);
   const style = `background: ${color}`;

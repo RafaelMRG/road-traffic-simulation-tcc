@@ -1,4 +1,6 @@
 
+// noinspection JSUnusedLocalSymbols
+
 const userCanDropObjects=true;
 drawVehIDs=true; // override control_gui.js
 drawRoadIDs=true; // override control_gui.js

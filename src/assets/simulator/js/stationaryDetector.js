@@ -1,3 +1,5 @@
+// noinspection JSUnusedLocalSymbols
+
 /**
 ##########################################################
 stationary detector  object constructor:

@@ -15,7 +15,7 @@
               class="mat-elevation-z2 flex-grow-1"
               mat-flat-button
               color="secondary"
-              (click)="simCommsService.startStopSim()"
+              (click)="simService.simCommsSvc.startStopSim()"
               [disabled]="isAutoControl"
             >
               <mat-icon
@@ -29,7 +29,7 @@
               class="mat-elevation-z2 flex-grow-1"
               mat-flat-button
               color="warn"
-              (click)="simCommsService.restartSim()"
+              (click)="simService.simCommsSvc.restartSim()"
               [disabled]="isAutoControl"
             >
               Restart
@@ -42,7 +42,9 @@
             <strong class="text-center" style="max-width: 14rem; display: block;">Modo de auto controle está ligado, botões desativados</strong>
             @if (!simService.simulationIsDone){
               <button mat-raised-button color="warn" (click)="simService.stopAutomatedSimulation()">Forçar parada</button>
-              <button mat-flat-button color="primary" class="w-100">Iteração: {{simConfigService.currentPopulation}} de {{ simConfigService.simConfig.population }}</button>
+              <button mat-flat-button color="primary" class="w-100">ID da simulação: {{simService.simConfSvc.simulationId}} </button>
+              <button mat-flat-button color="primary" class="w-100">Geração: {{simService.simConfSvc.currentGeneration}} </button>
+              <button mat-flat-button color="primary" class="w-100">Cidadão: {{simService.simConfSvc.currentPopulation}} de {{ simService.simConfSvc.simConfig.population }}</button>
             } @else {
               <button matTooltip="Clique para ver os botões novamente" (click)="simService.simulationIsDone = false" mat-flat-button color="primary"><mat-icon class="text-warning fw-bolder">done</mat-icon> Simulação terminou</button>
             }
@@ -58,14 +60,14 @@
       </mat-card-header>
       <mat-card-content class="py-3">
         <div class="d-flex gap-xl-5 gap-lg-1">
-          <form [formGroup]="simConfigService.trafficControl">
+          <form [formGroup]="simService.simConfSvc.trafficControl">
             
             <div>
               <h6 class="mb-0">Fluxo da estrada principal</h6>
               <mat-slider min="0" max="12000" step="1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="mainInflow">
               </mat-slider>
-              <strong>{{simConfigService.trafficControl.controls['mainInflow'].value}} {{units.veiPerHour}}</strong>
+              <strong>{{simService.simConfSvc.trafficControl.controls['mainInflow'].value}} {{units.veiPerHour}}</strong>
             </div>
             
             
@@ -74,7 +76,7 @@
               <mat-slider min="0" max="1600" step="1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="secondaryInflow">
               </mat-slider>
-              <strong>{{ simConfigService.trafficControl.controls['secondaryInflow'].value}} {{units.veiPerHour}}</strong>
+              <strong>{{ simService.simConfSvc.trafficControl.controls['secondaryInflow'].value}} {{units.veiPerHour}}</strong>
             </div>
             
             
@@ -83,7 +85,7 @@
               <mat-slider min="0" max="100" step="1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="percentRight">
               </mat-slider>
-              <strong>{{simConfigService.trafficControl.controls['percentRight'].value }} {{units.percentage}}</strong>
+              <strong>{{simService.simConfSvc.trafficControl.controls['percentRight'].value }} {{units.percentage}}</strong>
             </div>
             
             
@@ -92,7 +94,7 @@
               <mat-slider min="0" max="100" step="1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="percentLeft">
               </mat-slider>
-              <strong>{{simConfigService.trafficControl.controls['percentLeft'].value }} {{units.percentage}}</strong>
+              <strong>{{simService.simConfSvc.trafficControl.controls['percentLeft'].value }} {{units.percentage}}</strong>
             </div>
             
             
@@ -101,7 +103,7 @@
               <mat-slider min="0.2" max="25" step="0.1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="timelapse">
               </mat-slider>
-              <strong>{{simConfigService.trafficControl.controls['timelapse'].value }} {{units.time}}</strong>
+              <strong>{{simService.simConfSvc.trafficControl.controls['timelapse'].value }} {{units.time}}</strong>
             </div>
             
           </form>
@@ -119,14 +121,14 @@
       </mat-card-header>
       <mat-card-content class="py-3">
         <div class="d-flex gap-xl-5 gap-lg-1">
-          <form [formGroup]="simConfigService.carFollowingControl">
+          <form [formGroup]="simService.simConfSvc.carFollowingControl">
           
             <div>
               <h6 class="mb-0">Velocidade máxima</h6>
               <mat-slider min="20" max="120" step="1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="maxSpeed">
               </mat-slider>
-              <strong>{{simConfigService.carFollowingControl.controls['maxSpeed'].value}} {{units.speed}}</strong>
+              <strong>{{simService.simConfSvc.carFollowingControl.controls['maxSpeed'].value}} {{units.speed}}</strong>
             </div>
           
             <div>
@@ -134,7 +136,7 @@
               <mat-slider min="0.1" max="3" step="0.1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="timeGap">
               </mat-slider>
-              <strong>{{simConfigService.carFollowingControl.controls['timeGap'].value}} {{units.time}}</strong>
+              <strong>{{simService.simConfSvc.carFollowingControl.controls['timeGap'].value}} {{units.time}}</strong>
             </div>
           
             <div>
@@ -142,7 +144,7 @@
               <mat-slider min="0.3" max="4" step="0.1" discrete [disabled]="isAutoControl">
                 <input matSliderThumb formControlName="maxAccel">
               </mat-slider>
-              <strong>{{simConfigService.carFollowingControl.controls['maxAccel'].value}} {{units.accel}}</strong>
+              <strong>{{simService.simConfSvc.carFollowingControl.controls['maxAccel'].value}} {{units.accel}}</strong>
             </div>
           
           </form>

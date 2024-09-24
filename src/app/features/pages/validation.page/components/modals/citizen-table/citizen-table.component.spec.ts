@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CitizenTableComponent } from './citizen-table.component';
+import { CitizenTableComponent } from "./citizen-table.component";
 
 describe('CitizenTableComponent', () => {
   let component: CitizenTableComponent;

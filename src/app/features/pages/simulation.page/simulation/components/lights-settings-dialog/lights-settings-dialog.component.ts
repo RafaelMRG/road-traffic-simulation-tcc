@@ -1,12 +1,13 @@
 import { Component, inject } from "@angular/core";
-import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatSliderModule } from "@angular/material/slider";
-import { LightSettingsService } from "src/app/features/pages/simulation.page/simulation/components/lights-settings-dialog/light-settings.service";
-import { SimConfigControlService } from "src/app/features/pages/simulation.page/simulation/services/sim-config-control.service";
+import {
+	LightSettingsService
+} from "src/app/features/pages/simulation.page/simulation/components/lights-settings-dialog/light-settings.service";
 
 @Component({
 	selector: "app-lights-settings-dialog",

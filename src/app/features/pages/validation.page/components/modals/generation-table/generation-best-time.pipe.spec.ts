@@ -1,4 +1,4 @@
-import { GenerationBestTimePipe } from './generation-best-time.pipe';
+import { GenerationBestTimePipe } from "./generation-best-time.pipe";
 
 describe('GenerationBestTimePipe', () => {
   it('create an instance', () => {

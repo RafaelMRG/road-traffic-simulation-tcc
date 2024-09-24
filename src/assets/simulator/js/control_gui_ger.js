@@ -4,6 +4,7 @@
 // scenario file like ring.js, onramp.js
 // common canvas-related callbacks (mouse, touch) in canvas_gui.js
 //#############################################
+// noinspection JSUnusedLocalSymbols
 
 // general helper function 
 // (control_gui.js is one of the first js to be called)

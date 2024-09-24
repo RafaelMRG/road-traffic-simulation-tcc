@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CreditsPageComponent } from './credits.page.component';
+import { CreditsPageComponent } from "./credits.page.component";
 
 describe('CreditsPageComponent', () => {
   let component: CreditsPageComponent;
