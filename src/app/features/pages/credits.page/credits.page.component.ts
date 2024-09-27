@@ -1,18 +1,27 @@
-import { Component, inject } from "@angular/core";
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { SnackbarService } from "src/app/features/services/snackbar.service";
+import { Component } from "@angular/core";
+import { MatList, MatListItem, MatListModule } from "@angular/material/list";
 
 @Component({
-  selector: 'app-credits.page',
-  standalone: true,
-  imports: [MatSlideToggleModule],
-  templateUrl: './credits.page.component.html',
-  styleUrl: './credits.page.component.scss'
+	selector: "app-credits.page",
+	standalone: true,
+	imports: [
+		MatListModule,
+	],
+	templateUrl: "./credits.page.component.html",
+	styleUrl: "./credits.page.component.scss"
 })
 export class CreditsPageComponent {
 
-  snackbarService = inject(SnackbarService);
 
-  checado: boolean = false;
-  
+	protected credits = [
+		[["https://www.traffic-simulation.de/"], ["Martin Treiber ©"]],
+		[["Angular"], ["Google ©"]],
+		[["Angular Material"], ["Google LLC ©"]],
+		[["Chart.js"], ["chartjs ©"]],
+		[["Bootstrap"], ["Bootstrap"]],
+		[["FastAPI"], ["@tiangolo ©"]],
+		[["SQLite"], ["SQLite consortium"]],
+		[["Pydantic"], [""]],
+		[["SQLAlchemy"], ["Michael Bayer"]],
+	];
 } 

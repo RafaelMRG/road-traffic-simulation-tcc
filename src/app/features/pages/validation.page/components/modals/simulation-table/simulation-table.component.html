@@ -1,9 +1,9 @@
 <!-- simulation-table.component.html -->
 <div class="mb-3 d-flex align-items-center gap-3">
-	<button mat-raised-button color="primary" (click)="ngOnInit(); updateTable()">Refresh data</button>
-	<strong>Última atualização: {{lastUpdated | date : 'dd/MM/yyyy HH:mm:ss' }}</strong>
+	<button mat-raised-button color="primary" (click)="ngOnInit(); updateTable()">Atualizar dados</button>
+	<strong>Última atualização: {{(lastUpdated | date : 'dd/MM/yyyy HH:mm:ss') ?? "Não atualizado" }}</strong>
 </div>
-@if (dataSource){
+@if (dataSource && !showError){
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #table>
 		<ng-container matColumnDef="simulationId">
 			<th mat-header-cell *matHeaderCellDef> ID</th>

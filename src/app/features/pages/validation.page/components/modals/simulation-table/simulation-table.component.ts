@@ -35,9 +35,9 @@ export class SimulationTableComponent implements OnInit {
 			.then(
 				(sims: Simulation[]) => {
 					this.dataSource = new MatTableDataSource(sims);
+					this.lastUpdated = new Date();
 				})
 			.catch(() => this.showError = true)
-			.finally(() => this.lastUpdated = new Date());
 	}
 
 	updateTable(){

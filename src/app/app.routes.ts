@@ -6,6 +6,6 @@ import { ValidationPageComponent } from 'src/app/features/pages/validation.page/
 export const routes: Routes = [
     {path: 'home', redirectTo: 'simulacao'},
     {path: 'simulacao', component: SimulationsPageComponent},
-    {path: 'validacao-e-testes', component: ValidationPageComponent},
+    {path: 'resultados', component: ValidationPageComponent},
     {path: 'creditos', component: CreditsPageComponent},
 ];

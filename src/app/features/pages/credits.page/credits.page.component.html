@@ -1,1 +1,11 @@
-<mat-slide-toggle [checked]="checado">Slide me!</mat-slide-toggle>
+<div class="container my-4">
+	<h3>Créditos</h3>
+		<mat-list>
+		@for (credit of credits; track credit[0]) {
+			<mat-list-item>
+				<span matListItemTitle>{{ credit[0] }}</span>
+				<span matListItemLine>{{credit[1]}}</span>
+			</mat-list-item>
+		}
+		</mat-list>
+</div>

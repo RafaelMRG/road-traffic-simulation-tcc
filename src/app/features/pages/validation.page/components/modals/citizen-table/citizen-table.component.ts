@@ -29,7 +29,7 @@ export class CitizenTableComponent {
 	openRoadCrossings(roadCrossing: RoadCrossing[]) {
 	  this.dialog.open(BestSemaphoreVisualComponent, {
 		  data: roadCrossing,
-		  width: '45vw',
+		  width: '60vw',
 		  height: '55vh',
 	  })
 	}

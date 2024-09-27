@@ -40,8 +40,8 @@ export class AppComponent {
 		},
 		{
 			icon: 'experiment',
-			title: 'Validação e testes',
-			url: 'validacao-e-testes',
+			title: 'resultados',
+			url: 'resultados',
 		},
 		{
 			icon: 'help',

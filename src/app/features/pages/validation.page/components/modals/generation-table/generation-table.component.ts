@@ -53,7 +53,7 @@ export class GenerationTableComponent {
 	  this.dialog.open(BestSemaphoreVisualComponent, {
 		data: this.bestCitizen?.roadCrossings,
 		height: '55vh',
-		width: '45vw',
+		width: '60vw',
 	})
   }
 
